@@ -1,6 +1,4 @@
 {
-  "editor.formatOnSave": false,
-  "editor.formatOnPaste": false,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
@@ -18,9 +16,8 @@
     "editor.formatOnPaste": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "eslint.runtime": "node",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.exclude": {
     "**/.cache": true,
     "**/.DS_Store": true,
@@ -32,7 +29,9 @@
     "**/.pnp.*": true,
     "**/.prettierignore": true,
     "**/node_modules": true,
-    "**/yarn.lock": true
+    "**/yarn.lock": true,
+    "**/dist": true,
+    "*.gitignore": false
   },
   "search.exclude": {
     "**/dist/": true,
