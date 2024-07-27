@@ -1076,6 +1076,11 @@ colorette@^2.0.20:
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.20.tgz#9eb793e6833067f7235902fcd3b09917a000a95a"
   integrity sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
 
+commander@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-0.6.1.tgz#fa68a14f6a945d54dbbe50d8cdb3320e9e3b1a06"
+  integrity sha512-0fLycpl1UMTGX257hRsu/arL/cUbcvQM4zMKwvLvzXtfdezIV4yotPS2dYtknF+NmEfWSoCEF6+hj9XLm/6hEw==
+
 commander@^11.0.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-11.1.0.tgz#62fdce76006a68e5c1ab3314dc92e800eb83d906"
@@ -3655,6 +3660,13 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+touch-cli@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/touch-cli/-/touch-cli-0.0.1.tgz#6187764ab554e54a23df68ebb4025388af7bff49"
+  integrity sha512-NqFJf+83U4VoPAqv1aG+JrWXwPMKUyPL2zvzJq9n88gBMYlzM5Qgq8Haqs2O2ng4yPwlU9p2KaegJ/W6bkr2fQ==
+  dependencies:
+    commander "0.6.1"
 
 trim-repeated@^1.0.0:
   version "1.0.0"
