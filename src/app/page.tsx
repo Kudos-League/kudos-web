@@ -2,9 +2,10 @@ export function generateStaticParams() {
 	return [{ slug: [''] }];
 }
 
-const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Page() {
+	/*
 	fetch(`${apiUrl}/conversations`, {
 		method: 'GET'
 	})
@@ -13,6 +14,7 @@ export default function Page() {
 			console.log(data);
 		})
 		.catch(console.error);
+	*/
 
 	return '...';
 }
