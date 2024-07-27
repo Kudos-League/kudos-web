@@ -29,7 +29,8 @@ export default [
 			'plugin:import/typescript',
 			'plugin:@typescript-eslint/recommended',
 			'plugin:react/recommended',
-			'plugin:react-hooks/recommended'
+			'plugin:react-hooks/recommended',
+			'plugin:tailwindcss/recommended'
 		)
 	),
 	{
@@ -67,6 +68,11 @@ export default [
 
 			react: {
 				version: 'detect'
+			},
+
+			tailwindcss: {
+				callees: ['twMerge', 'createTheme'],
+				classRegex: '^(class(Name)|theme)?$'
 			}
 		},
 

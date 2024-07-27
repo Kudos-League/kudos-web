@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
-import logo from '../images/logo.svg';
+// TODO: navbar seems to cause hydration errors
+// import Navbar from '../components/Navbar';
+
 import '../index.css';
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body>
-				<Image priority src={logo} alt='logo' />
+				{/* <Navbar />*/}
 
 				<div id='root'>{children}</div>
 			</body>
