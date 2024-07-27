@@ -7,7 +7,7 @@ export default function Img(props) {
 	const { src, fallbackSrc, ...rest } = props;
 	const [imgSrc, setImgSrc] = useState(
 		typeof src === 'string' && src.startsWith('/')
-			? `/nextjs-github-pages/${src}`
+			? `/kudos-web/${src}`
 			: src
 	);
 
