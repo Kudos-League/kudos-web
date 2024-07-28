@@ -16,6 +16,8 @@
 		"deploy": "touch ./out/.nojekyll && gh-pages -d build -t true --nojekyll"
 	},
 	"dependencies": {
+		"@headlessui/react": "^2.1.2",
+		"@heroicons/react": "^2.1.5",
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^13.0.0",
 		"@testing-library/user-event": "^13.2.1",
@@ -23,8 +25,10 @@
 		"@types/node": "^16.7.13",
 		"@types/react": "^18.0.0",
 		"@types/react-dom": "^18.0.0",
+		"clsx": "^2.1.1",
 		"flowbite": "^2.4.1",
 		"flowbite-react": "^0.10.1",
+		"framer-motion": "^11.3.19",
 		"next": "^14.2.5",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",

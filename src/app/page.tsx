@@ -2,11 +2,9 @@ export function generateStaticParams() {
 	return [{ slug: [''] }];
 }
 
-// const apiUrl = process.env.REACT_APP_API_URL;
-
 export default function Page() {
 	/*
-	fetch(`${apiUrl}/conversations`, {
+	fetch(`${process.env.NEXT_PUBLIC_API_URL}/conversations`, {
 		method: 'GET'
 	})
 		.then((response) => response.text())

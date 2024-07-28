@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 
-// TODO: navbar seems to cause hydration errors
-// import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar';
 
 import '../index.css';
 
 export const metadata: Metadata = {
-	title: 'React App',
+	title: 'Karma Kudos',
 	description: 'Web site created with Next.js.'
 };
 
@@ -17,9 +16,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>
-				{/* <Navbar />*/}
-
+			<body suppressHydrationWarning={true}>
+				<Navbar />
 				<div id='root'>{children}</div>
 			</body>
 		</html>

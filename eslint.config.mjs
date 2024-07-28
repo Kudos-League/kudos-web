@@ -92,7 +92,8 @@ export default [
 			'@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
 			'no-empty': 'warn',
 			'prefer-const': 'warn',
-			'@typescript-eslint/ban-ts-comment': 'warn'
+			'@typescript-eslint/ban-ts-comment': 'warn',
+			'brace-style': ['error', 'stroustrup']
 		}
 	}
 ];
