@@ -1,3 +1,5 @@
+import Image from '@/components/Image';
+import logo from '@/images/logo.svg';
 import {
 	BarsArrowDownIcon,
 	UserIcon,
@@ -11,8 +13,6 @@ import {
 	NavbarToggle
 } from 'flowbite-react';
 import Link from 'next/link';
-import logo from '../images/logo.svg';
-import Image from './Image';
 
 export default function Nav() {
 	return (
@@ -32,7 +32,7 @@ export default function Nav() {
 			<NavbarToggle />
 			<NavbarCollapse>
 				<NavbarLink
-					href='/posts'
+					href={`${process.env.NEXT_PUBLIC_BASE_PATH}/posts`}
 					active
 					className='flex items-center justify-center'
 				>
@@ -42,7 +42,7 @@ export default function Nav() {
 					Feed
 				</NavbarLink>
 				<NavbarLink
-					href='/profiles'
+					href={`${process.env.NEXT_PUBLIC_BASE_PATH}/profiles`}
 					className='flex items-center justify-center'
 				>
 					<div className='w-10'>
@@ -51,7 +51,7 @@ export default function Nav() {
 					Users
 				</NavbarLink>
 				<NavbarLink
-					href='/user_groups'
+					href={`${process.env.NEXT_PUBLIC_BASE_PATH}/user_groups`}
 					className='flex items-center justify-center'
 				>
 					<div className='w-10'>

@@ -1,7 +1,3 @@
-export function generateStaticParams() {
-	return [{ slug: [''] }];
-}
-
 export default function Page() {
 	return (
 		<section className='bg-gray-50 dark:bg-gray-900'>

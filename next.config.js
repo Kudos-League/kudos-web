@@ -1,5 +1,7 @@
 // @ts-check
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 /**
  * @type {import('next').NextConfig}
  **/
@@ -16,7 +18,7 @@ const nextConfig = {
 	 *
 	 * @see https://nextjs.org/docs/app/api-reference/next-config-js/basePath
 	 */
-	basePath: '/kudos-web',
+	basePath: basePath,
 
 	/**
 	 * Disable server-based image optimization. Next.js does not support
