@@ -36,7 +36,7 @@
 		"**/node_modules": true,
 		"**/yarn.lock": true,
 		"**/dist": true,
-		"*.gitignore": false
+		"*.gitignore": true
 	},
 	"search.exclude": {
 		"**/dist/": true,
