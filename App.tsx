@@ -9,8 +9,7 @@ import CreatePost from "create-post/create-post";
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
-
+export function App() {
   return (
     <View style={styles.root}>
       <TopBar />
@@ -19,7 +18,7 @@ export default function App() {
   );
 }
 
-function MainContent() {
+export default function MainContent() {
   const linking: LinkingOptions<{}> = {
     prefixes: [
       createURL('/')
@@ -67,7 +66,7 @@ function MainContent() {
 function TopBar() {
   return (
     <View style={styles.topBar}>
-      <Image source={require("assets/images/logo.svg")} style={styles.logo}></Image>
+      <Image source={require("assets/images/logo.png")} style={styles.logo}></Image>
       <Text style={styles.titleText}>Kudos League</Text>
     </View>
   );
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   topBar: {
-    backgroundColor: '#bbffbb',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

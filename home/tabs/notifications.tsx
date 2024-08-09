@@ -1,11 +1,11 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import globalStyles from "shared/styles";
 
 export default function Notifications() {
     return (
         <View style={globalStyles.container}>
-            TODO: Add notifications
+            <Text>TODO: Add notifications</Text>
         </View>
     )
 }

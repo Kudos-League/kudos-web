@@ -1,11 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 import globalStyles from "shared/styles";
 
 export default function CreatePost() {
   return (
     <View style={globalStyles.container}>
-      TODO: Add Create Post form
+      <Text>TODO: Add Create Post form</Text>
     </View>
   );
 }
