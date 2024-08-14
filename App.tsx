@@ -42,16 +42,10 @@ export default function MainContent() {
           initialRouteName="Home"
           screenOptions={{
             headerRight: () => (
-              <Link to="/create-post" accessibilityLabel="Create Post">
-                <Pressable>
-                  {({ pressed }) => (
-                    <FontAwesome
-                      name="plus"
-                      size={25}
-                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                    />
-                  )}
-                </Pressable>
+              <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
+                <FontAwesome
+                    name="plus"
+                    size={25}/>
               </Link>
             ),
           }}>
