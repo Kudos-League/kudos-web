@@ -1,7 +1,6 @@
 import { Control, FieldValues, useController, UseControllerProps } from "react-hook-form";
-import { View } from "react-native";
+
 import { TextInput } from "react-native-paper";
-import globalStyles from "/shared/styles";
 
 type Props<T extends FieldValues> = {
     name: string;

@@ -1,9 +1,11 @@
 import { View } from "react-native";
+
 import { SubmitHandler, useForm } from 'react-hook-form';
+
+import { Button } from "react-native-paper";
 
 import globalStyles from "shared/styles";
 import Input from "shared/components/forms/input";
-import { Button } from "react-native-paper";
 
 export default function CreatePost() {
   const { handleSubmit, control } = useForm<FormValues>();

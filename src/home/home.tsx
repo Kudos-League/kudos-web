@@ -1,9 +1,11 @@
+import { ComponentProps } from 'react';
+
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import Feed from './tabs/feed';
 import Notifications from './tabs/notifications';
-import { ComponentProps } from 'react';
 
 const Tab = createBottomTabNavigator();
 

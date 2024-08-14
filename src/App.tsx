@@ -1,8 +1,11 @@
+import { Image, StyleSheet, View, Text } from "react-native";
+
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Link, LinkingOptions, NavigationContainer } from "@react-navigation/native";
+
 import { createURL } from "expo-linking";
+
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Pressable, Image, StyleSheet, View, Text } from "react-native";
 
 import Home from "home/home";
 import CreatePost from "create-post/create-post";
