@@ -1,5 +1,6 @@
 import { Control, FieldValues, useController, UseControllerProps } from "react-hook-form";
-import { TextInput, View, Text } from "react-native";
+import { View } from "react-native";
+import { TextInput } from "react-native-paper";
 import globalStyles from "shared/styles";
 
 type Props<T extends FieldValues> = {
@@ -14,12 +15,9 @@ export default function Input<T extends FieldValues>({name, control, label}: Pro
         name,
     });
     return (
-        <View style={globalStyles.formRow}>
-            <Text style={globalStyles.textInputLabel}>{label}</Text>
-            <TextInput
-                value={field.value}
-                onChangeText={field.onChange}
-                style={globalStyles.textInput} />
-        </View>
+        <TextInput
+            label={label}
+            value={field.value}
+            onChangeText={field.onChange} />
     );
 }

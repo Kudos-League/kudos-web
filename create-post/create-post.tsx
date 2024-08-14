@@ -1,9 +1,9 @@
-import { Button, View, Text} from "react-native";
+import { View } from "react-native";
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import globalStyles from "shared/styles";
 import Input from "shared/components/forms/input";
-import styles from "shared/styles";
+import { Button } from "react-native-paper";
 
 export default function CreatePost() {
   const { handleSubmit, control } = useForm<FormValues>();
@@ -15,10 +15,14 @@ export default function CreatePost() {
 
   return (
     <View style={globalStyles.container}>
-      <Input name="title" label="Title" control={control} />
-      <Input name="body" label="Body" control={control} />
-      <View style={styles.formRow}>
-        <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <View style={globalStyles.formRow}>
+        <Input name="title" label="Title" control={control} />
+      </View>
+      <View style={globalStyles.formRow}>
+        <Input name="body" label="Body" control={control} />
+      </View>
+      <View style={globalStyles.formRow}>
+        <Button onPress={handleSubmit(onSubmit)} mode='contained'>Submit</Button>
       </View>
     </View>
   );
@@ -27,4 +31,5 @@ export default function CreatePost() {
 type FormValues = {
   title: string;
   body: string;
+  isRequest: boolean;
 }
