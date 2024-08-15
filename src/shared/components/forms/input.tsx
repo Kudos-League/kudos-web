@@ -12,6 +12,7 @@ export default function Input<T extends FieldValues>({name, control, label}: Pro
     const { field } = useController<T>({
         control,
         name,
+        defaultValue: '' as T[keyof T],
     });
     return (
         <TextInput
