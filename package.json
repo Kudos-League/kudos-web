@@ -38,8 +38,12 @@
     "testMatch": [
       "**/?(*.)+(test).[jt]s?(x)"
     ],
-    "moduleDirectories": ["node_modules", "src"],
-    "testEnvironment": "jsdom"
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["/jest.setup.js"]
   },
   "scripts": {
     "start": "expo start",

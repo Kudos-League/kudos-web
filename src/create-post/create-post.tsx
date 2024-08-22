@@ -15,7 +15,7 @@ export default function CreatePost() {
     const request = {
       title: data.title,
       body: data.body,
-      isRequest: data.type === 'request',
+      // isRequest: data.type === 'request',
     }
     console.log(`submitted form for request:\n${JSON.stringify(request, null, 2)}`);
     console.log(`for errors:\n${JSON.stringify(form.formState.errors, null, 2)}`);
@@ -29,11 +29,10 @@ export default function CreatePost() {
           name="type"
           form={form}
           options={[
-            { label: 'in search of', value: 'request' },
-            { label: 'offering up', value: 'offer' },
+            { label: 'Get stuff', value: 'request' },
+            { label: 'Give stuff', value: 'offer' },
           ]}
         />
-        <Text>these item(s)?</Text>
       </View>
       <View style={globalStyles.formRow}>
         <Input
