@@ -19,6 +19,7 @@ export default function Input<T extends FieldValues>({name, label, form, registe
     return (
         <TextInput
             label={label}
+            accessibilityLabel={label}
             value={field.value}
             onChangeText={field.onChange}
             {...form.register(name, registerOptions)} />

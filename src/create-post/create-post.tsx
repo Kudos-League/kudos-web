@@ -13,8 +13,8 @@ export default function CreatePost() {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const request = {
-      title: data.title,
-      body: data.body,
+      // title: data.title,
+      // body: data.body,
       // isRequest: data.type === 'request',
     }
     console.log(`submitted form for request:\n${JSON.stringify(request, null, 2)}`);
@@ -22,7 +22,7 @@ export default function CreatePost() {
   }
 
   return (
-    <View style={globalStyles.container}>
+    <View>
       <View style={globalStyles.formRow}>
         <Text>Is this post</Text>
         <Picker

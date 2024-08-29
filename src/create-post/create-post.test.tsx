@@ -1,31 +1,37 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, screen } from '@testing-library/react-native';
 import CreatePost from './create-post';
-import { useController, useForm } from 'react-hook-form';
-
-jest.mock('react-hook-form', () => ({
-  ...jest.requireActual('react-hook-form'),
-  useForm: jest.fn(),
-  useController: jest.fn(),
-}));
 
 describe('CreatePost', () => {
-  it('calls onSubmit when the submit button is pressed', () => {
-    const handleSubmit = jest.fn((fn) => fn);
-    const control = {};
-
-    (useController as jest.Mock).mockReturnValue({
-      field: {
-        onChange: jest.fn(),
-        value: '',
+  function setup(): { mockHandleSubmit: jest.Mock } {
+    const mockHandleSubmit = jest.fn(fn => fn);
+    jest.mock('react-hook-form', () => {
+      const module = jest.requireActual('react-hook-form');
+      return {
+        ...module,
+        useForm: () => ({...module.useForm(), handleSubmit: mockHandleSubmit})
       }
     });
-    (useForm as jest.Mock).mockReturnValue({ handleSubmit, control });
 
-    const { getByText } = render(<CreatePost />);
-    const submitButton = getByText('Submit');
+    return {mockHandleSubmit};
+  }
+
+  // TODO: MAKE SURE TO INPUT ONE FIELD AND NOT THE OTHER
+  it('does calls onSubmit when title and body have content', async () => {
+    const { mockHandleSubmit } = setup();
+    render(<CreatePost />);
+
+    const titleTextInput = await screen.findByLabelText('Title');
+    fireEvent(titleTextInput, 'some text');
+
+    const bodyTextInput = await screen.findByLabelText('Body');
+    fireEvent(bodyTextInput, 'some text');
+    
+    const submitButton = await screen.findByText('Submit');
 
     fireEvent.press(submitButton);
 
-    expect(handleSubmit).toHaveBeenCalled();
+    expect(mockHandleSubmit).toHaveBeenCalled();
   });
+
+  // TODO: pit() FOR WHEN ONE FIELD IS EMPTY
 });
