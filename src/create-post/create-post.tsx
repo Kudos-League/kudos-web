@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Button } from "react-native-paper";
 
@@ -9,7 +9,7 @@ import Input from "shared/components/forms/input";
 import Picker from "shared/components/forms/picker";
 
 export default function CreatePost() {
-  const { handleSubmit, control } = useForm<FormValues>();
+  const form: UseFormReturn<FormValues> = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const request = {
@@ -18,7 +18,7 @@ export default function CreatePost() {
       isRequest: data.type === 'request',
     }
     console.log(`submitted form for request:\n${JSON.stringify(request, null, 2)}`);
-    alert(`submitted form with request:\n${JSON.stringify(request, null, 2)}`);
+    console.log(`for errors:\n${JSON.stringify(form.formState.errors, null, 2)}`);
   }
 
   return (
@@ -27,7 +27,7 @@ export default function CreatePost() {
         <Text>Is this post</Text>
         <Picker
           name="type"
-          control={control}
+          form={form}
           options={[
             { label: 'in search of', value: 'request' },
             { label: 'offering up', value: 'offer' },
@@ -36,13 +36,19 @@ export default function CreatePost() {
         <Text>these item(s)?</Text>
       </View>
       <View style={globalStyles.formRow}>
-        <Input name="title" label="Title" control={control} />
+        <Input
+            name="title"
+            label="Title"
+            form={form} />
       </View>
       <View style={globalStyles.formRow}>
-        <Input name="body" label="Body" control={control} />
+        <Input 
+            name="body"
+            label="Body"
+            form={form} />
       </View>
       <View style={globalStyles.formRow}>
-        <Button onPress={handleSubmit(onSubmit)} mode='contained'>Submit</Button>
+        <Button onPress={form.handleSubmit(onSubmit)} mode='contained'>Submit</Button>
       </View>
     </View>
   );

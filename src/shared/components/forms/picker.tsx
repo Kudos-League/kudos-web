@@ -1,15 +1,15 @@
 import { Picker as NativePicker } from "@react-native-picker/picker";
-import { useController, Control, FieldValues, UseControllerProps } from 'react-hook-form';
+import { useController, Control, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
 
 type Props<T extends FieldValues> = {
   name: string;
-  control: Control<T>;
+  form: UseFormReturn<T>;
   options: { label: string; value: string }[];
 } & UseControllerProps<T>;
   
-export default function Picker<T extends FieldValues>({ name, control, options }: Props<T>) {
+export default function Picker<T extends FieldValues>({ name, options, form }: Props<T>) {
   const { field } = useController<T>({
-      control,
+      control: form.control,
       name,
       defaultValue: options[0].value as T[keyof T],
   });
