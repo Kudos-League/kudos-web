@@ -6,7 +6,7 @@ import { Button } from "react-native-paper";
 
 import globalStyles from "shared/styles";
 import Input from "shared/components/forms/input";
-import RadioGroup from "shared/components/forms/radio-group";
+import Picker from "shared/components/forms/picker";
 
 export default function CreatePost() {
   const { handleSubmit, control } = useForm<FormValues>();
@@ -25,7 +25,7 @@ export default function CreatePost() {
     <View style={globalStyles.container}>
       <View style={globalStyles.formRow}>
         <Text>Is this post</Text>
-        <RadioGroup
+        <Picker
           name="type"
           control={control}
           options={[
