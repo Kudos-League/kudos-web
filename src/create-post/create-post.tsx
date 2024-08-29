@@ -39,16 +39,18 @@ export default function CreatePost() {
         <Input
             name="title"
             label="Title"
-            form={form} />
+            form={form}
+            registerOptions={{required: true}} />
       </View>
       <View style={globalStyles.formRow}>
         <Input 
             name="body"
             label="Body"
-            form={form} />
+            form={form}
+            registerOptions={{required: true}} />
       </View>
       <View style={globalStyles.formRow}>
-        <Button onPress={form.handleSubmit(onSubmit)} mode='contained'>Submit</Button>
+        <Button onPress={form.handleSubmit(onSubmit)} disabled={!form.formState.isValid} mode='contained'>Submit</Button>
       </View>
     </View>
   );
