@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@react-native-picker/picker": "^2.8.0",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.18",
@@ -12,6 +11,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.52.2",
     "react-native": "0.74.5",
+    "react-native-element-dropdown": "^2.12.1",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-paper": "^5.12.5",
     "react-native-reanimated": "~3.10.1",
