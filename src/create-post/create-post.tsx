@@ -27,7 +27,7 @@ export default function CreatePost() {
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.formRow}>
-        <Text>Is this post</Text>
+        <Text>I want to</Text>
         <Picker
           name="type"
           form={form}
