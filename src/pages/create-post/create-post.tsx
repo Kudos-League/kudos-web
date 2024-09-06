@@ -4,9 +4,11 @@ import { SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
 
 import { Button } from "react-native-paper";
 
-import globalStyles from "shared/styles";
+import { CreatePostDTO } from "shared/api/types";
+import { createPost } from "shared/api/actions";
 import Input from "shared/components/forms/input";
 import Picker from "shared/components/forms/picker";
+import globalStyles from "shared/styles";
 
 export default function CreatePost() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
@@ -14,14 +16,19 @@ export default function CreatePost() {
   const onInvalid = (e) => {
     console.log(e)
   }
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const request = {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const request: CreatePostDTO = {
       title: data.title,
       body: data.body,
       isRequest: data.type === 'request',
     }
-    console.log(`submitted form for request:\n${JSON.stringify(request, null, 2)}`);
-    console.log(`for errors:\n${JSON.stringify(form.formState.errors, null, 2)}`);
+
+    try {
+      await createPost(request);
+    } catch (e) {
+      // TODO: Handle error
+      console.error('Error trying to create post:', e);
+    }
   }
 
   return (
