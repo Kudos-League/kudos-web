@@ -9,6 +9,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
+import Donate from "pages/donate/donate";
 
 const Drawer = createDrawerNavigator();
 
@@ -37,6 +38,7 @@ export default function MainContent() {
           }
         },
         ['Create Post']: 'create-post',
+        Donate: 'donate',
       },
     }
   };
@@ -56,6 +58,7 @@ export default function MainContent() {
           }}>
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Create Post" component={CreatePost} />
+        <Drawer.Screen name="Donate" component={Donate} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
