@@ -7,8 +7,8 @@ import { createURL } from "expo-linking";
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-import Home from "home/home";
-import CreatePost from "create-post/create-post";
+import Home from "pages/home/home";
+import CreatePost from "pages/create-post/create-post";
 
 const Drawer = createDrawerNavigator();
 
@@ -63,7 +63,7 @@ export default function MainContent() {
 function TopBar() {
   return (
     <View style={styles.topBar}>
-      <Image source={require("assets/images/logo.png")} style={styles.logo}></Image>
+      <Image source={require("shared/assets/images/logo.png")} style={styles.logo}></Image>
       <Text style={styles.titleText}>Kudos League</Text>
     </View>
   );
