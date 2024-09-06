@@ -31,7 +31,9 @@ export default function MainContent() {
         Home: {
           screens: {
             Feed: 'home/feed',
-            Notifications: 'home/notifications'
+            Notifications: 'home/notifications',
+            Profile: 'home/profile',
+            Settings: 'home/settings',
           }
         },
         ['Create Post']: 'create-post',
