@@ -14,8 +14,9 @@ export default function CreatePost() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
 
   const onInvalid = (e) => {
-    console.log(e)
+    console.error(e);
   }
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const request: CreatePostDTO = {
       title: data.title,
@@ -59,7 +60,10 @@ export default function CreatePost() {
             registerOptions={{required: true}} />
       </View>
       <View style={globalStyles.formRow}>
-        <Button onPress={form.handleSubmit(onSubmit,onInvalid)} mode='contained'>Submit</Button>
+        <Button
+            onPress={form.handleSubmit(onSubmit, onInvalid)}
+            disabled={!form.formState.isValid}
+            mode='contained'>Submit</Button>
       </View>
     </View>
   );
