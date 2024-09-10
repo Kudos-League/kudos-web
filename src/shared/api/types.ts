@@ -12,3 +12,8 @@ export type UserLoginRequestSchemaDTO = {
   email: string;
   password: string;
 }
+
+export type UserLoginResponseDTO = {
+  token: string;
+  user: unknown;
+}
