@@ -9,9 +9,12 @@ import { createPost } from "shared/api/actions";
 import Input from "shared/components/forms/input";
 import Picker from "shared/components/forms/picker";
 import globalStyles from "shared/styles";
+import { useContext } from "react";
+import { TokenContext } from "shared/contexts";
 
 export default function CreatePost() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
+  const token = useContext<string|null>(TokenContext);
 
   const onInvalid = (e) => {
     console.error(e);
@@ -25,7 +28,11 @@ export default function CreatePost() {
     }
 
     try {
-      await createPost(request);
+      if (!token) {
+        // TODO: Block the create page without a token
+        throw new Error('No token. Please register or log in.');
+      }
+      await createPost(request, token);
     } catch (e) {
       // TODO: Handle error
       console.error('Error trying to create post:', e);

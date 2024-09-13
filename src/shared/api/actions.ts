@@ -1,13 +1,33 @@
 import { Environment, getEndpointUrl } from "./config";
-import { CreatePostDTO, UserLoginRequestSchemaDTO, UserLoginResponseDTO } from "./types";
+import { CreatePostDTO, CreateUserDTO, PostDTO, UserLoginRequestSchemaDTO, UserLoginResponseDTO } from "./types";
 import axios from "axios";
 
-// TODO: Type return value if/when we factor API types into a codebase shared by FE/BE
+// TODO: Type all request/response values if/when we factor API types into a codebase shared by FE/BE
+
 /** @throws {AxiosError} */
-export async function createPost(request: CreatePostDTO) {
-  return await axios.post(`${getEndpointUrl(Environment.LOCAL)}/posts`, request);
+export async function createPost(request: CreatePostDTO, token: string) {
+  return await axios.post(
+    `${getEndpointUrl(Environment.LOCAL)}/posts`,
+    request,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }},
+  );
 }
 
-export async function login(request: UserLoginRequestSchemaDTO): Promise<UserLoginResponseDTO> {
+/** @throws {AxiosError} */
+export async function register(request: CreateUserDTO): Promise<{data: UserLoginResponseDTO}> {
+  return await axios.post(`${getEndpointUrl(Environment.LOCAL)}/users/register`, request);
+}
+
+/** @throws {AxiosError} */
+export async function login(request: UserLoginRequestSchemaDTO): Promise<{data: UserLoginResponseDTO}> {
   return await axios.post(`${getEndpointUrl(Environment.LOCAL)}/users/login`, request);
+}
+
+/** @throws {AxiosError} */
+export async function getPosts(): Promise<PostDTO[]> {
+  return await axios.get(`${getEndpointUrl(Environment.LOCAL)}/posts`);
 }

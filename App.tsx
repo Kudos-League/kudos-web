@@ -14,19 +14,35 @@ import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
 import { TokenContext } from "shared/contexts";
-import { login } from "shared/api/actions";
+import { login, register } from "shared/api/actions";
+import { AxiosError } from "axios";
 
 const Drawer = createDrawerNavigator();
+
 
 function SharedLayout({ children }) {
   const [token, setToken] = useState<string|null>(null);
 
+  // TODO: Move this to a real login page (this is just a temporary way to get a token to test CreatePost)
   async function onLogin() {
-    const loginResponse = await login({
-      email: 'fake.address@gmail.com',
-      password: 'fake password',
-    });
-    setToken(loginResponse.token);
+    try {
+      const loginResponse = await login({
+        email: 'fake.address@gmail.com',
+        password: 'fake password',
+      });
+      setToken(loginResponse.data.token);
+    } catch (e) {
+      switch ((e as AxiosError).response?.status) {
+        case 400:
+          const registerResponse = await register({
+            username: 'FakeUsername',
+            email: 'fake.address@gmail.com',
+            password: 'fake password',
+          });
+          setToken(registerResponse.data.token);
+          return;
+      }
+    }
   }
 
   return (
