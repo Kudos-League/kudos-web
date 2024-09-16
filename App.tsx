@@ -13,51 +13,17 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
+import Login from "pages/login/login";
+
 import { TokenContext } from "shared/contexts";
 import { login, register } from "shared/api/actions";
 import { AxiosError } from "axios";
 
 const Drawer = createDrawerNavigator();
 
-
-function SharedLayout({ children }) {
+export default function App() {
   const [token, setToken] = useState<string|null>(null);
 
-  // TODO: Move this to a real login page (this is just a temporary way to get a token to test CreatePost)
-  async function onLogin() {
-    try {
-      const loginResponse = await login({
-        email: 'fake.address@gmail.com',
-        password: 'fake password',
-      });
-      setToken(loginResponse.data.token);
-    } catch (e) {
-      switch ((e as AxiosError).response?.status) {
-        case 400:
-          const registerResponse = await register({
-            username: 'FakeUsername',
-            email: 'fake.address@gmail.com',
-            password: 'fake password',
-          });
-          setToken(registerResponse.data.token);
-          return;
-      }
-    }
-  }
-
-  return (
-    <View style={styles.root}>
-      <View style={styles.mainContent}>
-        <TokenContext.Provider value={token}>
-          {children}
-        </TokenContext.Provider>
-      </View>
-      <Button onPress={onLogin}>Login</Button>
-    </View>
-  );
-};
-
-export default function App() {
   const linking: LinkingOptions<{}> = {
     prefixes: [
       createURL('/')
@@ -74,29 +40,40 @@ export default function App() {
         },
         ['Create Post']: 'create-post',
         Donate: 'donate',
+        Login: {
+          screens: {
+            ['Sign In']: '/login/sign-in',
+            ['Sign Up']: '/login/sign-up',
+          }
+        }
       },
     }
   };
 
   return (
     <NavigationContainer linking={linking}>
-      <SharedLayout>
-        <Drawer.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerRight: () => (
-                <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
-                  <FontAwesome
-                      name="plus"
-                      size={25}/>
-                </Link>
-              ),
-            }}>
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="Create Post" component={CreatePost} />
-          <Drawer.Screen name="Donate" component={Donate} />
-        </Drawer.Navigator>
-      </SharedLayout>
+      <View style={styles.root}>
+        <View style={styles.mainContent}>
+          <TokenContext.Provider value={token}>
+            <Drawer.Navigator
+                initialRouteName="Home"
+                screenOptions={{
+                  headerRight: () => (
+                    <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
+                      <FontAwesome
+                          name="plus"
+                          size={25}/>
+                    </Link>
+                  ),
+                }}>
+              <Drawer.Screen name="Home" component={Home} />
+              <Drawer.Screen name="Create Post" component={CreatePost} />
+              <Drawer.Screen name="Donate" component={Donate} />
+              {!token && <Drawer.Screen name="Login" component={Login} />}
+            </Drawer.Navigator>
+          </TokenContext.Provider>
+        </View>
+      </View>
     </NavigationContainer>
   );
 }
