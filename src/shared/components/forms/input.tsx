@@ -6,10 +6,11 @@ type Props<T extends FieldValues> = {
     name: string;
     label: string;
     form: UseFormReturn<T>;
+    type?: 'password';
     registerOptions?: RegisterOptions<T>;
 } & UseControllerProps<T>;
 
-export default function Input<T extends FieldValues>({name, label, form, registerOptions}: Props<T>) {
+export default function Input<T extends FieldValues>({name, label, form, registerOptions, type}: Props<T>) {
     const { field } = useController<T>({
         control: form.control,
         name,
@@ -22,6 +23,7 @@ export default function Input<T extends FieldValues>({name, label, form, registe
             accessibilityLabel={label}
             value={field.value}
             onChangeText={field.onChange}
+            secureTextEntry={type === 'password'}
             {...form.register(name, registerOptions)} />
     );
 }
