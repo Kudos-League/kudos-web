@@ -4,6 +4,8 @@ import { Button } from "react-native-paper";
 
 import globalStyles from "shared/styles";
 import Input from "shared/components/forms/input";
+import { register } from "shared/api/actions";
+import { CreateUserDTO } from "shared/api/types";
 
 export default function SignUp() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
@@ -14,8 +16,17 @@ export default function SignUp() {
     console.error(e);
   }
 
-  async function onSubmit() {
-    // TODO: Call API
+  async function onSubmit({username, email, password}: CreateUserDTO) {
+    try {
+      const resp = await register({username, email, password});
+      console.log('HOORAY! token:');
+      console.log(resp.data.token);
+      // TODO: Go to homepage
+      // TODO: Set token
+    } catch (e) {
+      console.error(`Failed to register: ${e}`)
+      // TODO: Add error message
+    }
   }
 
   return (
