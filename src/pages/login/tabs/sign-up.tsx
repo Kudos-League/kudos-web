@@ -7,7 +7,12 @@ import Input from "shared/components/forms/input";
 import { register } from "shared/api/actions";
 import { CreateUserDTO } from "shared/api/types";
 
+import { useAppDispatch } from "app/hooks";
+
+import { updateAuth } from "../auth-slice"
+
 export default function SignUp() {
+  const dispatch = useAppDispatch();
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
   const password = form.watch('password');
 
@@ -18,11 +23,13 @@ export default function SignUp() {
 
   async function onSubmit({username, email, password}: CreateUserDTO) {
     try {
+      // TODO: Switch this to a Thunk
       const resp = await register({username, email, password});
-      console.log('HOORAY! token:');
-      console.log(resp.data.token);
+      dispatch(updateAuth({
+        token: resp.data.token,
+        username: resp.data.user.username,
+      }));
       // TODO: Go to homepage
-      // TODO: Set token
     } catch (e) {
       console.error(`Failed to register: ${e}`)
       // TODO: Add error message
