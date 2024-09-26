@@ -9,12 +9,11 @@ import { createPost } from "shared/api/actions";
 import Input from "shared/components/forms/input";
 import Picker from "shared/components/forms/picker";
 import globalStyles from "shared/styles";
-import { useContext } from "react";
-import { TokenContext } from "shared/contexts";
+import { useAppSelector } from "app/hooks";
 
 export default function CreatePost() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
-  const token = useContext<string|null>(TokenContext);
+  const token = useAppSelector(state => state.auth.token);
 
   const onInvalid = (e) => {
     console.error(e);

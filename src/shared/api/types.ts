@@ -23,7 +23,9 @@ export type UserLoginRequestSchemaDTO = {
 
 export type UserLoginResponseDTO = {
   token: string;
-  user: unknown;
+  user: {
+    username: string;
+  };
 }
 
 export type CreateUserDTO = {

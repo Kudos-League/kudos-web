@@ -14,14 +14,23 @@ import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
 import Login from "pages/login/login";
+import {store} from "app/store";
 
-import { TokenContext } from "shared/contexts";
+import { Provider } from 'react-redux';
 import { login, register } from "shared/api/actions";
 import { AxiosError } from "axios";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  return (
+    <Provider store={store}>
+      <AppImpl />
+    </Provider>
+  )
+}
+
+function AppImpl() {
   const [token, setToken] = useState<string|null>(null);
 
   const linking: LinkingOptions<{}> = {
@@ -40,6 +49,7 @@ export default function App() {
         },
         ['Create Post']: 'create-post',
         Donate: 'donate',
+        // TODO: Change the name to "Switch Accounts" if there is already a token
         Login: {
           screens: {
             ['Sign In']: '/login/sign-in',
@@ -54,24 +64,22 @@ export default function App() {
     <NavigationContainer linking={linking}>
       <View style={styles.root}>
         <View style={styles.mainContent}>
-          <TokenContext.Provider value={token}>
-            <Drawer.Navigator
-                initialRouteName="Home"
-                screenOptions={{
-                  headerRight: () => (
-                    <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
-                      <FontAwesome
-                          name="plus"
-                          size={25}/>
-                    </Link>
-                  ),
-                }}>
-              <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Create Post" component={CreatePost} />
-              <Drawer.Screen name="Donate" component={Donate} />
-              {!token && <Drawer.Screen name="Login" component={Login} />}
-            </Drawer.Navigator>
-          </TokenContext.Provider>
+          <Drawer.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerRight: () => (
+                  <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
+                    <FontAwesome
+                        name="plus"
+                        size={25}/>
+                  </Link>
+                ),
+              }}>
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Create Post" component={CreatePost} />
+            <Drawer.Screen name="Donate" component={Donate} />
+            {!token && <Drawer.Screen name="Login" component={Login} />}
+          </Drawer.Navigator>
         </View>
       </View>
     </NavigationContainer>
