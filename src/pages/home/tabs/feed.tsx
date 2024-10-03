@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { getPosts } from "shared/api/actions";
 import { PostDTO } from "shared/api/types";
+import PostsContainer from "shared/components/posts/PostsContainer";
 
 import globalStyles from "shared/styles";
 
@@ -21,11 +22,7 @@ export default function Feed() {
 
   return (
     <View style={globalStyles.container}>
-      {
-        posts === null ?
-          'Loading...' :
-          posts.map(post => post.title) // TODO: Make this a proper "Post" component
-      }
+      <PostsContainer/>
     </View>
   );
 }
