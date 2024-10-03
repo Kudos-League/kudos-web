@@ -28,6 +28,7 @@ export default function SignUp() {
       dispatch(updateAuth({
         token: resp.data.token,
         username: resp.data.user.username,
+        tokenTimestamp: new Date(),
       }));
       // TODO: Go to homepage
     } catch (e) {
