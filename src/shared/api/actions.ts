@@ -1,4 +1,4 @@
-import { Environment, getEndpointUrl } from "./config";
+import { getEndpointUrl } from "./config";
 import { CreatePostDTO, CreateUserDTO, PostDTO, UserLoginRequestSchemaDTO, UserLoginResponseDTO } from "./types";
 import axios from "axios";
 
@@ -7,7 +7,7 @@ import axios from "axios";
 /** @throws {AxiosError} */
 export async function createPost(request: CreatePostDTO, token: string) {
   return await axios.post(
-    `${getEndpointUrl(Environment.LOCAL)}/posts`,
+    `${getEndpointUrl()}/posts`,
     request,
     {
       headers: {
@@ -19,15 +19,15 @@ export async function createPost(request: CreatePostDTO, token: string) {
 
 /** @throws {AxiosError} */
 export async function register(request: CreateUserDTO): Promise<{data: UserLoginResponseDTO}> {
-  return await axios.post(`${getEndpointUrl(Environment.LOCAL)}/users/register`, request);
+  return await axios.post(`${getEndpointUrl()}/users/register`, request);
 }
 
 /** @throws {AxiosError} */
 export async function login(request: UserLoginRequestSchemaDTO): Promise<{data: UserLoginResponseDTO}> {
-  return await axios.post(`${getEndpointUrl(Environment.LOCAL)}/users/login`, request);
+  return await axios.post(`${getEndpointUrl()}/users/login`, request);
 }
 
 /** @throws {AxiosError} */
 export async function getPosts(): Promise<PostDTO[]> {
-  return await axios.get(`${getEndpointUrl(Environment.LOCAL)}/posts`);
+  return await axios.get(`${getEndpointUrl()}/posts`);
 }
