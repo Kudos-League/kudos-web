@@ -45,7 +45,7 @@ export default function PostsContainer() {
   const [users, setUsers] = useState<any>(usersResponse);
   const [loading, setLoading] = useState(false);
 
-  let morePosts = [{ //MOCKUP DATA, keep in mind that this is an array of objects
+  let morePosts = [{ //MOCKUP DATA, keep in mind that this is an array of objects. This what is used when you "scroll down"
           id: `${users.length + 1}`,
           username: "user1",
           title: "First Post",
