@@ -11,7 +11,7 @@ import PostCard from "./PostCard";
 //   kudos: number;
 //   tags: string[]; // Add tags prop
 // }
-const usersResponse = [
+const usersResponse = [ //MOCKUP DATA
   {
     id: "1",
     username: "user1",
@@ -45,6 +45,15 @@ export default function PostsContainer() {
   const [users, setUsers] = useState<any>(usersResponse);
   const [loading, setLoading] = useState(false);
 
+  let morePosts = [{ //MOCKUP DATA, keep in mind that this is an array of objects
+          id: `${users.length + 1}`,
+          username: "user1",
+          title: "First Post",
+          body: "This is the body of the first post.",
+          type: "gift",
+          kudos: 10,
+          tags: ["intro", "welcome"],
+        }]
 
   // Fetch more communities
   const fetchMoreCommunities = () => {
@@ -54,17 +63,7 @@ export default function PostsContainer() {
 
     // Simulate API call with a timeout
     setTimeout(() => {
-      const newUsers = [
-        {
-          id: `${users.length + 1}`,
-          username: "user1",
-          title: "First Post",
-          body: "This is the body of the first post.",
-          type: "gift",
-          kudos: 10,
-          tags: ["intro", "welcome"],
-        },
-      ];
+      const newUsers = morePosts;
 
       setUsers((prevUsers) => [...prevUsers, ...newUsers]);
       setLoading(false);
@@ -112,3 +111,4 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
