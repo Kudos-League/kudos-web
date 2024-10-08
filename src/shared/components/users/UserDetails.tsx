@@ -3,6 +3,8 @@ import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
 import { Avatar, Button } from "@mui/material";
 import Tags from "../Tags";
 import { TabView } from "react-native-tab-view";
+import CommunitiesMicroContainer from "../communities/CommunitiesMicroContainer";
+import PostMicroContainer from "../posts/PostMicroContainer";
 
 const profileData = { //MOCKUP
   username:"USERNAME",
@@ -63,13 +65,13 @@ export default function UserDetails() {
             case "posts":
               return (
                 <View style={styles.tabContent}>
-                  <Text>Posts Content</Text>
+                  <PostMicroContainer />
                 </View>
               );
             case "communities":
               return (
                 <View style={styles.tabContent}>
-                  <Text>Communities Content</Text>
+                  <CommunitiesMicroContainer />
                 </View>
               );
             case "activity":
@@ -143,7 +145,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   tabContent: {
-    height: "50%",
     padding: 10,
     backgroundColor: "#f5f5f5",
   },
