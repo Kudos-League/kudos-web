@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FlatList, Text, View, StyleSheet } from "react-native";
 import PostCard from "./PostCard";
+import { PostDTO } from "shared/api/types";
 
 // Example data structure
 // interface Props {
@@ -41,12 +42,16 @@ const usersResponse = [ //MOCKUP DATA
   },
 ];
 
-export default function PostsContainer() {
-  const [users, setUsers] = useState<any>(usersResponse);
+interface props {
+  posts: PostDTO[] | null;
+}
+
+export default function PostsContainer({ posts: receivedPosts }: props) {
+  const [posts, setPosts] = useState<any>(usersResponse);
   const [loading, setLoading] = useState(false);
 
   let morePosts = [{ //MOCKUP DATA, keep in mind that this is an array of objects. This what is used when you "scroll down"
-          id: `${users.length + 1}`,
+          id: `${posts.length + 1}`,
           username: "user1",
           title: "First Post",
           body: "This is the body of the first post.",
@@ -65,7 +70,7 @@ export default function PostsContainer() {
     setTimeout(() => {
       const newUsers = morePosts;
 
-      setUsers((prevUsers) => [...prevUsers, ...newUsers]);
+      setPosts((prevUsers) => [...prevUsers, ...newUsers]);
       setLoading(false);
     }, 1500);
   };
@@ -82,7 +87,7 @@ export default function PostsContainer() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={users}
+        data={posts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <PostCard

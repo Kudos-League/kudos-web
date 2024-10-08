@@ -22,7 +22,7 @@ export default function Feed() {
 
   return (
     <View style={globalStyles.container}>
-      <PostsContainer/>
+      <PostsContainer posts={posts}/>
     </View>
   );
 }
