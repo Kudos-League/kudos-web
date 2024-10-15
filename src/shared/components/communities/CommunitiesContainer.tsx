@@ -20,6 +20,25 @@ const initialCommunities = [
   },
 ];
 
+const createNewCommunites = (id: Number) => {
+  return [
+        {
+          id: String(id),
+          name: "r/climbing",
+          members: "1M",
+          online: "80",
+          description: "For climbers!",
+        },
+        {
+          id: String(id),
+          name: "r/swimming",
+          members: "800k",
+          online: "40",
+          description: "Swim lovers' group.",
+        },
+  ] 
+}
+
 export default function CommunitiesContainer() {
   const [communities, setCommunities] = useState(initialCommunities);
   const [loading, setLoading] = useState(false);
@@ -32,22 +51,9 @@ export default function CommunitiesContainer() {
 
     // Simulate API call with a timeout
     setTimeout(() => {
-      const newCommunities = [
-        {
-          id: String(communities.length + 1),
-          name: "r/climbing",
-          members: "1M",
-          online: "80",
-          description: "For climbers!",
-        },
-        {
-          id: String(communities.length + 2),
-          name: "r/swimming",
-          members: "800k",
-          online: "40",
-          description: "Swim lovers' group.",
-        },
-      ];
+      const newCommunities = 
+        createNewCommunites(communities.length + 1)
+      ;
 
       setCommunities((prevCommunities) => [
         ...prevCommunities,

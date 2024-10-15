@@ -6,7 +6,7 @@ type Props<T extends FieldValues> = {
     name: string;
     label: string;
     form: UseFormReturn<T>;
-    type?: 'password';
+    type?: 'password' | 'body' | null;
     registerOptions?: RegisterOptions<T>;
 } & UseControllerProps<T>;
 
@@ -24,6 +24,7 @@ export default function Input<T extends FieldValues>({name, label, form, registe
             value={field.value}
             onChangeText={field.onChange}
             secureTextEntry={type === 'password'}
+            style={type === "body" ? {height: 400} : {}}
             {...form.register(name, registerOptions)} />
     );
 }

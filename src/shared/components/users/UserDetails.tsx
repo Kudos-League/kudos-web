@@ -31,12 +31,7 @@ export default function UserDetails() {
         </View>
 
         {/* Buttons for friend, chat, and block */}
-        <View style={styles.buttonContainer}>
-          <Button onPress={() => {}}>Friend</Button>
-          <Button onPress={() => {}}>Chat</Button>
-          <Button onPress={() => {}}>Block</Button>
-        </View>
-      </View>
+              </View>
 
       {/* Tags */}
       <View style={styles.tags}>
@@ -47,6 +42,8 @@ export default function UserDetails() {
       <View style={styles.bio}>
         <Text style={styles.bioText}>{profileData.bio}</Text>
       </View>
+
+      <Button sx={{ marginBottom: 2 }}>Edit data</Button>
 
       {/* Tabs */}
       {/* TODO: Install react native tab view for android and Iphone*/}

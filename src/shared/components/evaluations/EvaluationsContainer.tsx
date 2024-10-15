@@ -49,6 +49,23 @@ const evaluationsEntries = [
   }
 ];
 
+const createNewEvaluations = (id: Number) => {
+  return [
+  {
+    id: `${id}`,
+    sender: "Eve Brown",
+    receiver: "Mike Davis",
+    body: "Hey, crazy good apple",
+    kudos: 2,
+    post: 789,
+    post_title: "I give an apple",
+    post_type: "gift",
+    post_tags: ["destruction", "war crimes", "chaos"]
+  }
+      ];
+
+}
+
 export default function EvaluationsContainer() {
   const [evaluations, setEvaluations] = useState<any>(evaluationsEntries);
   const [loading, setLoading] = useState(false);
@@ -61,20 +78,7 @@ export default function EvaluationsContainer() {
 
     // Simulate API call with a timeout
     setTimeout(() => {
-      const newEvaluations = [
-  {
-    id: `${evaluations.length + 1}`,
-    sender: "Eve Brown",
-    receiver: "Mike Davis",
-    body: "Hey, crazy good apple",
-    kudos: 2,
-    post: 789,
-    post_title: "I give an apple",
-    post_type: "gift",
-    post_tags: ["destruction", "war crimes", "chaos"]
-  }
-      ];
-
+      const newEvaluations = createNewEvaluations(evaluations.length + 1) 
       setEvaluations((prevEvaluations) => [...prevEvaluations, ...newEvaluations]);
       setLoading(false);
     }, 1500);

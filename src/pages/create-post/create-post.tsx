@@ -62,8 +62,10 @@ export default function CreatePost() {
         <Input 
             name="body"
             label="Body"
+            type="body"
             form={form}
-            registerOptions={{required: true}} />
+            registerOptions={{required: true}} 
+            />
       </View>
       <View style={globalStyles.formRow}>
         <Button
