@@ -3,15 +3,6 @@ import { FlatList, Text, View, StyleSheet } from "react-native";
 import PostCard from "./PostCard";
 import { PostDTO } from "shared/api/types";
 
-// Example data structure
-// interface Props {
-//   username: string;
-//   title: string;
-//   body: string;
-//   type: string;
-//   kudos: number;
-//   tags: string[]; // Add tags prop
-// }
 const usersResponse = [ //MOCKUP DATA
   {
     id: "1",
@@ -42,6 +33,18 @@ const usersResponse = [ //MOCKUP DATA
   },
 ];
 
+const createMockup = (id: Number ) => {
+  return { //MOCKUP DATA, keep in mind that this is an array of objects. This what is used when you "scroll down"
+          id: `${id}`,
+          username: "user1",
+          title: "First Post",
+          body: "This is the body of the first post.",
+          type: "gift",
+          kudos: 10,
+          tags: ["intro", "welcome"],
+        };
+}
+
 interface props {
   posts: PostDTO[] | null;
 }
@@ -50,15 +53,9 @@ export default function PostsContainer({ posts: receivedPosts }: props) {
   const [posts, setPosts] = useState<any>(usersResponse);
   const [loading, setLoading] = useState(false);
 
-  let morePosts = [{ //MOCKUP DATA, keep in mind that this is an array of objects. This what is used when you "scroll down"
-          id: `${posts.length + 1}`,
-          username: "user1",
-          title: "First Post",
-          body: "This is the body of the first post.",
-          type: "gift",
-          kudos: 10,
-          tags: ["intro", "welcome"],
-        }]
+  let morePosts = [
+    createMockup(posts.length + 1)
+  ]
 
   // Fetch more communities
   const fetchMoreCommunities = () => {
@@ -74,15 +71,6 @@ export default function PostsContainer({ posts: receivedPosts }: props) {
       setLoading(false);
     }, 1500);
   };
-
-  // interface Props {
-  //   username: string;
-  //   title: string;
-  //   body: string;
-  //   type: string;
-  //   kudos: number;
-  //   tags: string[]; // Add tags prop
-  // }
 
   return (
     <View style={styles.container}>

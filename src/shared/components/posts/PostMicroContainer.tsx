@@ -9,12 +9,14 @@ const initialCommunities = [
     name: "I'm giving some stuff",
     type: "gift",
     description: "SUPER COOL!",
+    tags: ["cool", "stuff", "super"],
   },
   {
     id: "2",
     name: "I want some stuff",
     type: "request",
     description: "GIMME GIMME",
+    tags: ["stuff", "gimme"],
   },
 ];
 
@@ -33,7 +35,7 @@ export default function PostMicroContainer() {
             name={item.name}
             type={item.type}
             description={item.description}
-            tags={["tag1", "tag2", "tag3"]}
+            tags={item.tags}
           />
         )}
         onEndReachedThreshold={0.1}
