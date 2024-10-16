@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import { useForm, UseFormReturn } from 'react-hook-form';
+import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 
 import globalStyles from "shared/styles";
@@ -14,6 +15,7 @@ import { updateAuth } from "../auth-slice"
 export default function SignUp() {
   const dispatch = useAppDispatch();
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
+  const navigation = useNavigation();
   const password = form.watch('password');
 
   const onInvalid = (e) => {
@@ -30,7 +32,7 @@ export default function SignUp() {
         username: resp.data.user.username,
         tokenTimestamp: new Date(),
       }));
-      // TODO: Go to homepage
+      navigation.navigate('Home', {screen: 'Feed'});
     } catch (e) {
       console.error(`Failed to register: ${e}`)
       // TODO: Add error message
