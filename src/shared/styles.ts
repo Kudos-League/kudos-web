@@ -12,5 +12,11 @@ export default StyleSheet.create({
         marginVertical: 5,
         gap: 10,
         fontWeight: "bold"
+    },
+    errorMessage: {
+        color: 'red',
+        fontWeight: 'bold',
+        borderRadius: 5,
+        fontSize: 16,
     }
 });
