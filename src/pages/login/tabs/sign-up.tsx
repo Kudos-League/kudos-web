@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { View, Text } from "react-native";
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { useNavigation } from "@react-navigation/native";
+
+import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import globalStyles from "shared/styles";
 import Input from "shared/components/forms/input";
 import { register } from "shared/api/actions";
-import { CreateUserDTO } from "shared/api/types";
+import { CreateUserDTO, UserLoginResponseDTO } from "shared/api/types";
 
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch } from "redux/hooks";
 
-import { updateAuth } from "../auth-slice"
+import { AuthState, updateAuth } from "../../../redux/slices/auth-slice"
 import { AxiosError } from "axios"; 
+import { ASYNC_STORAGE_KEY__AUTH_DATA } from "shared/constants";
 
 export default function SignUp() {
   const dispatch = useAppDispatch();
@@ -53,18 +56,28 @@ export default function SignUp() {
     }
   }
 
+  async function handleSuccess(response: {data: UserLoginResponseDTO}) {
+    const authState: AuthState = {
+      token: response.data.token,
+      username: response.data.user.username,
+      tokenTimestamp: Date.now(),
+    };
+    dispatch(updateAuth(authState));
+    navigation.navigate('Home', {screen: 'Feed'});
+    try {
+      await AsyncStorage.setItem(ASYNC_STORAGE_KEY__AUTH_DATA, JSON.stringify(authState));
+    } catch (e) {
+      console.error(`Failed to save auth data to persist between sessions. Error: ${e}`)
+    }
+  }
+
   async function onSubmit({username, email, password}: CreateUserDTO) {
     setErrorMessage(null);
     setFormIssues(null);
     try {
       // TODO: Switch this to a Thunk
-      const resp = await register({username, email, password});
-      dispatch(updateAuth({
-        token: resp.data.token,
-        username: resp.data.user.username,
-        tokenTimestamp: new Date(),
-      }));
-      navigation.navigate('Home', {screen: 'Feed'});
+      const response = await register({username, email, password});
+      await handleSuccess(response);
     } catch (e) {
       handleError(e);
     }

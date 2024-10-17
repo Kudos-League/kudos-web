@@ -14,11 +14,15 @@ import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
 import Login from "pages/login/login";
-import {store} from "app/store";
+
+import {store} from "redux/store";
+import useAuth from "shared/hooks/use_auth";
 
 import { Provider } from 'react-redux';
 import { login, register } from "shared/api/actions";
 import { AxiosError } from "axios";
+import { useAppSelector } from "redux/hooks";
+import { isValidAuthState } from "redux/slices/auth-slice";
 
 const Drawer = createDrawerNavigator();
 
@@ -31,7 +35,8 @@ export default function App() {
 }
 
 function AppImpl() {
-  const [token, setToken] = useState<string|null>(null);
+  useAuth();
+  const authState = useAppSelector(state => state.auth);
 
   const linking: LinkingOptions<{}> = {
     prefixes: [
@@ -78,7 +83,7 @@ function AppImpl() {
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Create Post" component={CreatePost} />
             <Drawer.Screen name="Donate" component={Donate} />
-            {!token && <Drawer.Screen name="Login" component={Login} />}
+            {isValidAuthState(authState) ? <Drawer.Screen name="Switch Account" component={Login} /> : <Drawer.Screen name="Login" component={Login} />}
           </Drawer.Navigator>
         </View>
       </View>

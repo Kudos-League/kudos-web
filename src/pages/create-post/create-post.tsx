@@ -9,7 +9,7 @@ import { createPost } from "shared/api/actions";
 import Input from "shared/components/forms/input";
 import Picker from "shared/components/forms/picker";
 import globalStyles from "shared/styles";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "redux/hooks";
 
 export default function CreatePost() {
   const form: UseFormReturn<FormValues> = useForm<FormValues>();
