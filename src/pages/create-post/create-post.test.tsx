@@ -1,6 +1,8 @@
 import { render, fireEvent, screen } from '@testing-library/react-native';
 import CreatePost from './create-post';
 import { flushPromises } from 'testing/test_utils';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 
 const mockOnSubmit = jest.fn();
 
@@ -22,7 +24,7 @@ describe('Submit button', () => {
   });
 
   it('calls onSubmit for submit button press when title and body have content', async () => {
-    render(<CreatePost />);
+    render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
     fireEvent.changeText(titleTextInput, 'some text');
@@ -37,7 +39,7 @@ describe('Submit button', () => {
   });
 
   it('does not call onSubmit for submit button press when body is untouched', async () => {
-    render(<CreatePost />);
+    render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
     fireEvent.changeText(titleTextInput, 'some text');
@@ -50,7 +52,7 @@ describe('Submit button', () => {
   });
 
   it('does not call onSubmit for submit button press when title is untouched', async () => {
-    render(<CreatePost />);
+    render(<Provider store={store}><CreatePost /></Provider>);
     
     const bodyTextInput = await screen.findByLabelText('Body');
     fireEvent.changeText(bodyTextInput, 'some text');
@@ -63,7 +65,7 @@ describe('Submit button', () => {
   });
 
   it('does not call onSubmit for submit button press when body is empty', async () => {
-    render(<CreatePost />);
+    render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
     fireEvent.changeText(titleTextInput, 'some text');
@@ -78,7 +80,7 @@ describe('Submit button', () => {
   });
 
   it('does not call onSubmit for submit button press when title is untouched', async () => {
-    render(<CreatePost />);
+    render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
     fireEvent.changeText(titleTextInput, '');
