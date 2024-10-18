@@ -2,7 +2,7 @@ import { render, fireEvent, screen } from '@testing-library/react-native';
 import CreatePost from './create-post';
 import { flushPromises } from 'testing/test_utils';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { store } from '../../redux/store';
 
 const mockOnSubmit = jest.fn();
 
