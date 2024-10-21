@@ -21,9 +21,10 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.username = action.payload.username;
       state.tokenTimestamp = action.payload.tokenTimestamp;
-    }
+    },
+    resetAuthState: () => initialState
   }
 })
 
-export const {updateAuth} = authSlice.actions;
+export const {updateAuth, resetAuthState} = authSlice.actions;
 export default authSlice.reducer;
