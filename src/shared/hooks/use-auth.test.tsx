@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { store } from 'redux_store/store';
-import useAuth from 'shared/hooks/use_auth';
+import useAuth from 'shared/hooks/use-auth';
 import { useAppSelector } from 'redux_store/hooks';
 import { Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,9 +11,6 @@ import { ASYNC_STORAGE_KEY__AUTH_DATA } from 'shared/constants';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
 }));
 
 function TestComponent() {
@@ -35,7 +32,7 @@ function mockPersistentAuthState(authState: string|null) {
 }
 
 describe('useAuth hook', () => {
-  afterEach(() => {
+  beforeEach(() => {
     (AsyncStorage.getItem as jest.Mock).mockClear();
     store.dispatch(resetAuthState());
   });
@@ -58,14 +55,6 @@ describe('useAuth hook', () => {
     expect(screen.queryByText('No token')).toBeFalsy();
     expect(screen.queryByText('No username')).toBeFalsy();
     expect(screen.queryByText('No tokenTimestamp')).toBeFalsy();
-    
-    console.log(screen.queryByText(TOKEN))
-    console.log(screen.queryByText(USERNAME))
-    console.log(screen.queryByText(TOKEN_TIMESTAMP))
-
-    console.log(screen.queryByText('No token'))
-    console.log(screen.queryByText('No username'))
-    console.log(screen.queryByText('No tokenTimestamp'))
   });
 
   it('gracefully handles when there is no persistent authState', async () => {
@@ -82,14 +71,6 @@ describe('useAuth hook', () => {
     expect(screen.queryByText('No token')).toBeTruthy();
     expect(screen.queryByText('No username')).toBeTruthy();
     expect(screen.queryByText('No tokenTimestamp')).toBeTruthy();
-    
-    console.log(screen.queryByText(TOKEN))
-    console.log(screen.queryByText(USERNAME))
-    console.log(screen.queryByText(TOKEN_TIMESTAMP))
-
-    console.log(screen.queryByText('No token'))
-    console.log(screen.queryByText('No username'))
-    console.log(screen.queryByText('No tokenTimestamp'))
   });
 
   it('searches storage for shared key constant', async () => {

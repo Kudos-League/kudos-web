@@ -13,7 +13,7 @@ import Donate from "pages/donate/donate";
 import Login from "pages/login/login";
 
 import {store} from "redux_store/store";
-import useAuth from "shared/hooks/use_auth";
+import useAuth from "shared/hooks/use-auth";
 
 import { Provider } from 'react-redux';
 import { useAppSelector } from "redux_store/hooks";
