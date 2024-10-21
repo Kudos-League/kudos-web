@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
-
-import { Button } from "react-native-paper";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Link, LinkingOptions, NavigationContainer } from "@react-navigation/native";
@@ -19,8 +16,6 @@ import {store} from "redux_store/store";
 import useAuth from "shared/hooks/use_auth";
 
 import { Provider } from 'react-redux';
-import { login, register } from "shared/api/actions";
-import { AxiosError } from "axios";
 import { useAppSelector } from "redux_store/hooks";
 import { isValidAuthState } from "redux_store/slices/auth-slice";
 
