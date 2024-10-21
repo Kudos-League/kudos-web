@@ -15,14 +15,14 @@ import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
 import Login from "pages/login/login";
 
-import {store} from "redux/store";
+import {store} from "redux_store/store";
 import useAuth from "shared/hooks/use_auth";
 
 import { Provider } from 'react-redux';
 import { login, register } from "shared/api/actions";
 import { AxiosError } from "axios";
-import { useAppSelector } from "redux/hooks";
-import { isValidAuthState } from "redux/slices/auth-slice";
+import { useAppSelector } from "redux_store/hooks";
+import { isValidAuthState } from "redux_store/slices/auth-slice";
 
 const Drawer = createDrawerNavigator();
 

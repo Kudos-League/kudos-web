@@ -14,9 +14,9 @@ import Input from "shared/components/forms/input";
 import { register } from "shared/api/actions";
 import { CreateUserDTO, UserLoginResponseDTO } from "shared/api/types";
 
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch } from "redux_store/hooks";
 
-import { AuthState, updateAuth } from "../../../redux/slices/auth-slice"
+import { AuthState, updateAuth } from "redux_store/slices/auth-slice"
 import { AxiosError } from "axios"; 
 import { ASYNC_STORAGE_KEY__AUTH_DATA } from "shared/constants";
 

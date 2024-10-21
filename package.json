@@ -46,9 +46,15 @@
     "testMatch": [
       "**/?(*.)+(test).[jt]s?(x)"
     ],
+    "roots": [
+      "<rootDir>/src"
+    ],
     "moduleDirectories": [
       "node_modules",
       "src"
+    ],
+    "modulePaths": [
+      "<rootDir>/src"
     ],
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [

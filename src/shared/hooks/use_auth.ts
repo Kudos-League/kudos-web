@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
-import { useAppDispatch } from 'redux/hooks';
-import { AuthState, updateAuth } from 'redux/slices/auth-slice';
+import { useAppDispatch } from 'redux_store/hooks';
+import { AuthState, updateAuth } from 'redux_store/slices/auth-slice';
 import { ASYNC_STORAGE_KEY__AUTH_DATA } from 'shared/constants';
 
 export default function useAuth() {
