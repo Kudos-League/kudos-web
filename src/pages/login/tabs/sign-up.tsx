@@ -22,7 +22,7 @@ import { ASYNC_STORAGE_KEY__AUTH_DATA } from "shared/constants";
 
 export default function SignUp() {
   const dispatch = useAppDispatch();
-  const form: UseFormReturn<FormValues> = useForm<FormValues>();
+  const form: UseFormReturn<SignUpFormValues> = useForm<SignUpFormValues>();
   const navigation = useNavigation<any>();
   const [errorMessage, setErrorMessage] = useState<string|null>(null);
   const [formIssues, setFormIssues] = useState<FormIssues|null>(null);
@@ -134,7 +134,7 @@ export default function SignUp() {
   );
 }
 
-type FormValues = {
+export type SignUpFormValues = {
   username: string;
   email: string;
   password: string;
