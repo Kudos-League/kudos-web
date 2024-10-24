@@ -1,10 +1,10 @@
-import { render, fireEvent, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 import CreatePost from './create-post';
-import { flushPromises } from 'testing/test_utils';
 import { Provider } from 'react-redux';
 import { store } from 'redux_store/store';
 
 const mockOnSubmit = jest.fn();
+const user = userEvent.setup();
 
 jest.mock('react-hook-form', () => {
   const module = jest.requireActual('react-hook-form');
@@ -19,22 +19,21 @@ jest.mock('react-hook-form', () => {
 
 
 describe('Submit button', () => {
-  afterEach(() => {
-    mockOnSubmit.mockClear();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
   it('calls onSubmit for submit button press when title and body have content', async () => {
     render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
-    fireEvent.changeText(titleTextInput, 'some text');
+    await user.type(titleTextInput, 'some text');
     const bodyTextInput = await screen.findByLabelText('Body');
-    fireEvent.changeText(bodyTextInput, 'some text');
+    await user.type(bodyTextInput, 'some text');
 
     const submitButton = await screen.findByText('Submit');
-    fireEvent.press(submitButton);
+    await user.press(submitButton);
 
-    await flushPromises();
     expect(mockOnSubmit).toHaveBeenCalled();
   });
 
@@ -42,12 +41,11 @@ describe('Submit button', () => {
     render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
-    fireEvent.changeText(titleTextInput, 'some text');
+    await user.type(titleTextInput, 'some text');
 
     const submitButton = await screen.findByText('Submit');
-    fireEvent.press(submitButton);
+    await user.press(submitButton);
 
-    await flushPromises();
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
 
@@ -55,12 +53,11 @@ describe('Submit button', () => {
     render(<Provider store={store}><CreatePost /></Provider>);
     
     const bodyTextInput = await screen.findByLabelText('Body');
-    fireEvent.changeText(bodyTextInput, 'some text');
+    await user.type(bodyTextInput, 'some text');
 
     const submitButton = await screen.findByText('Submit');
-    fireEvent.press(submitButton);
+    await user.press(submitButton);
 
-    await flushPromises();
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
 
@@ -68,14 +65,13 @@ describe('Submit button', () => {
     render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
-    fireEvent.changeText(titleTextInput, 'some text');
+    await user.type(titleTextInput, 'some text');
     const bodyTextInput = await screen.findByLabelText('Body');
-    fireEvent.changeText(bodyTextInput, '');
+    await user.type(bodyTextInput, '');
 
     const submitButton = await screen.findByText('Submit');
-    fireEvent.press(submitButton);
+    await user.press(submitButton);
 
-    await flushPromises();
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
 
@@ -83,14 +79,13 @@ describe('Submit button', () => {
     render(<Provider store={store}><CreatePost /></Provider>);
     
     const titleTextInput = await screen.findByLabelText('Title');
-    fireEvent.changeText(titleTextInput, '');
+    await user.type(titleTextInput, '');
     const bodyTextInput = await screen.findByLabelText('Body');
-    fireEvent.changeText(bodyTextInput, 'some text');
+    await user.type(bodyTextInput, 'some text');
 
     const submitButton = await screen.findByText('Submit');
-    fireEvent.press(submitButton);
+    await user.press(submitButton);
 
-    await flushPromises();
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
 });
