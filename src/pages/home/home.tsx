@@ -5,7 +5,7 @@ import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-nav
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import Feed from './tabs/feed';
-import Profile from './tabs/profile';
+import MyProfile from './tabs/my-profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ export default function Home() {
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       {/* TODO (post MVP): Add Notification and Settings tabs  */}
       <Tab.Screen name="Feed" options={getTabOptions('history')} component={Feed} />
-      <Tab.Screen name="Profile" options={getTabOptions('user-circle')} component={Profile} />
+      <Tab.Screen name="My Profile" options={getTabOptions('user-circle')} component={MyProfile} />
     </Tab.Navigator>
   );
 }

@@ -11,6 +11,7 @@ import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
 import Login from "pages/login/login";
+import Search from "pages/search/search";
 
 import {store} from "redux_store/store";
 import useAuth from "shared/hooks/use-auth";
@@ -43,7 +44,7 @@ function AppImpl() {
           screens: {
             Feed: 'home/feed',
             Notifications: 'home/notifications',
-            Profile: 'home/profile',
+            ['My Profile']: 'home/my-profile',
             Settings: 'home/settings',
           }
         },
@@ -55,7 +56,13 @@ function AppImpl() {
             ['Sign In']: '/login/sign-in',
             ['Sign Up']: '/login/sign-up',
           }
-        }
+        },
+        Search: {
+          screens: {
+            Home: '/search',
+            User: '/user/:username',
+          }
+        },
       },
     }
   };
@@ -78,6 +85,7 @@ function AppImpl() {
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Create Post" component={CreatePost} />
             <Drawer.Screen name="Donate" component={Donate} />
+            <Drawer.Screen name="Search" component={Search} />
             {isValidAuthState(authState) ? <Drawer.Screen name="Switch Account" component={Login} /> : <Drawer.Screen name="Login" component={Login} />}
           </Drawer.Navigator>
         </View>
