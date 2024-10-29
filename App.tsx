@@ -89,6 +89,7 @@ function getLinkingOptions(): LinkingOptions<{}> {
           screens: {
             Home: '/search',
             User: '/user/:username',
+            Post: '/post/:id',
           }
         },
       },
