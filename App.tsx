@@ -34,7 +34,35 @@ function AppImpl() {
   useAuth();
   const authState = useAppSelector(state => state.auth);
 
-  const linking: LinkingOptions<{}> = {
+  return (
+    <NavigationContainer linking={getLinkingOptions()}>
+      <View style={styles.root}>
+        <View style={styles.mainContent}>
+          <Drawer.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerRight: () => (
+                  <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
+                    <FontAwesome
+                        name="plus"
+                        size={25}/>
+                  </Link>
+                ),
+              }}>
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Create Post" component={CreatePost} />
+            <Drawer.Screen name="Donate" component={Donate} />
+            <Drawer.Screen name="Search" component={Search} />
+            {isValidAuthState(authState) ? <Drawer.Screen name="Switch Account" component={Login} /> : <Drawer.Screen name="Login" component={Login} />}
+          </Drawer.Navigator>
+        </View>
+      </View>
+    </NavigationContainer>
+  );
+}
+
+function getLinkingOptions(): LinkingOptions<{}> {
+  return {
     prefixes: [
       createURL('/')
     ],
@@ -66,42 +94,6 @@ function AppImpl() {
       },
     }
   };
-
-  return (
-    <NavigationContainer linking={linking}>
-      <View style={styles.root}>
-        <View style={styles.mainContent}>
-          <Drawer.Navigator
-              initialRouteName="Home"
-              screenOptions={{
-                headerRight: () => (
-                  <Link style={{ marginRight: 15 }} to={{ screen: 'Create Post' }} accessibilityLabel="Create Post">
-                    <FontAwesome
-                        name="plus"
-                        size={25}/>
-                  </Link>
-                ),
-              }}>
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="Create Post" component={CreatePost} />
-            <Drawer.Screen name="Donate" component={Donate} />
-            <Drawer.Screen name="Search" component={Search} />
-            {isValidAuthState(authState) ? <Drawer.Screen name="Switch Account" component={Login} /> : <Drawer.Screen name="Login" component={Login} />}
-          </Drawer.Navigator>
-        </View>
-      </View>
-    </NavigationContainer>
-  );
-}
-
-        
-function TopBar() {
-  return (
-    <View style={styles.topBar}>
-      <Image source={require("shared/assets/images/logo.png")} style={styles.logo}></Image>
-      <Text style={styles.titleText}>Kudos League</Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
