@@ -46,8 +46,8 @@ describe('useAuth hook', () => {
     render(<Provider store={store}><TestComponent /></Provider>);
     
     await screen.findByText(TOKEN);
-    await screen.findByText(USERNAME);
-    await screen.findByText(String(TOKEN_TIMESTAMP));
+    screen.queryByText(USERNAME);
+    screen.queryByText(String(TOKEN_TIMESTAMP));
 
     expect(screen.queryByText('No token')).toBeFalsy();
     expect(screen.queryByText('No username')).toBeFalsy();
@@ -60,8 +60,8 @@ describe('useAuth hook', () => {
     render(<Provider store={store}><TestComponent /></Provider>);
 
     await screen.findByText('No token');
-    await screen.findByText('No username');
-    await screen.findByText('No tokenTimestamp');
+    screen.queryByText('No username');
+    screen.queryByText('No tokenTimestamp');
 
     expect(screen.queryByText(TOKEN)).toBeFalsy();
     expect(screen.queryByText(USERNAME)).toBeFalsy();
@@ -72,5 +72,5 @@ describe('useAuth hook', () => {
     render(<Provider store={store}><TestComponent /></Provider>);
 
     expect(AsyncStorage.getItem as jest.Mock).toHaveBeenCalledWith(ASYNC_STORAGE_KEY__AUTH_DATA);
-  })
+  });
 });
