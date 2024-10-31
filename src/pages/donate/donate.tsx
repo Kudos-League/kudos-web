@@ -1,12 +1,28 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-import globalStyles from "shared/styles";
-import Stripe from "shared/components/payment/Stripe";
+// import globalStyles from "shared/styles";
+import Stripe from "shared/components/payment";
 
-export default function Feed() {
-  return (
-    <View style={globalStyles.container}>
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+
+const BoldAndBeautiful = () => (
+  <SafeAreaProvider>
+    <SafeAreaView style={styles.container}>
       <Stripe />
-    </View>
-  );
-}
+    </SafeAreaView>
+  </SafeAreaProvider>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  baseText: {
+    fontWeight: "bold",
+  },
+  innerText: {
+    color: "red",
+  },
+});
+
+export default BoldAndBeautiful;

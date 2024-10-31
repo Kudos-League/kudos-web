@@ -5,7 +5,7 @@
   "userInterfaceStyle": "automatic",
   "expo": {
     "web": {
-      "bundler": "metro"
+      "bundler": "webpack"
     }
   }
 }
