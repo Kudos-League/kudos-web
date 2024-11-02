@@ -8,7 +8,11 @@
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
     "test": "jest --watchAll",
-    "build:web": "npx expo export:web"
+    "build:web": "npx expo export:web",
+    "start:local": "webpack serve --config webpack.local.js",
+    "start:dev": "webpack serve --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:web:dev": "webpack --config webpack.dev.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -66,7 +70,10 @@
     "react-native-web": "^0.19.13",
     "stream-browserify": "^3.0.0",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^6.0.1"
   },
   "jest": {
     "preset": "jest-expo",

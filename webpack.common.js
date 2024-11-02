@@ -1,9 +1,6 @@
 const createExpoWebpackConfigAsync = require("@expo/webpack-config");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const webpack = require("webpack");
-const Dotenv = require("dotenv-webpack");
-
-// TODO: Read dev env for remote deployment
 
 module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(env, argv);
@@ -30,13 +27,6 @@ module.exports = async function (env, argv) {
   config.plugins.push(
     new webpack.IgnorePlugin({
       resourceRegExp: /@stripe\/stripe-react-native/,
-    })
-  );
-
-  config.plugins.push(
-    new Dotenv({
-      path: "./.env",
-      systemvars: true,
     })
   );
 

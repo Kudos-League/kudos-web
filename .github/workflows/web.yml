@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-      - stripe # TOOD: Remove this
+      - stripe # TODO: Remove this
   workflow_dispatch:
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build the Web App
-        run: npm run build:web
+      - name: Build the Web App (Dev Environment)
+        run: npm run build:web:dev
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
