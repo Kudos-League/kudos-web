@@ -3,6 +3,8 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 
+// TODO: Read dev env for remote deployment
+
 module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(env, argv);
 

@@ -1,31 +1,72 @@
 import { Suspense } from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-
+import { StyleSheet, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   Link,
   LinkingOptions,
   NavigationContainer,
 } from "@react-navigation/native";
-
 import { createURL } from "expo-linking";
-
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
 import Donate from "pages/donate/donate";
+import Success from "pages/donate/success";
+import Cancel from "pages/donate/cancel";
 import Login from "pages/login/login";
 import Search from "pages/search/search";
 
 import { store } from "redux_store/store";
 import useAuth from "shared/hooks/use-auth";
-
 import { Provider } from "react-redux";
 import { useAppSelector } from "redux_store/hooks";
 import { isValidAuthState } from "redux_store/slices/auth-slice";
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
+function DrawerNavigator() {
+  const authState = useAppSelector((state) => state.auth);
+
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerRight: () => (
+          <Link
+            style={{ marginRight: 15 }}
+            to={{ screen: "Create Post" }}
+            accessibilityLabel="Create Post"
+          >
+            <FontAwesome name="plus" size={25} />
+          </Link>
+        ),
+      }}
+    >
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Create Post" component={CreatePost} />
+      <Drawer.Screen name="Donate" component={Donate} />
+      <Drawer.Screen name="Search" component={Search} />
+      {authState && isValidAuthState(authState) ? (
+        <Drawer.Screen name="Switch Account" component={Login} />
+      ) : (
+        <Drawer.Screen name="Login" component={Login} />
+      )}
+    </Drawer.Navigator>
+  );
+}
+
+function MainStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      <Stack.Screen name="Success" component={Success} />
+      <Stack.Screen name="Cancel" component={Cancel} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -39,34 +80,10 @@ export default function App() {
 
 function AppImpl() {
   useAuth();
-  const authState = useAppSelector((state) => state.auth);
 
   return (
     <NavigationContainer linking={getLinkingOptions()}>
-      <Drawer.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerRight: () => (
-            <Link
-              style={{ marginRight: 15 }}
-              to={{ screen: "Create Post" }}
-              accessibilityLabel="Create Post"
-            >
-              <FontAwesome name="plus" size={25} />
-            </Link>
-          ),
-        }}
-      >
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Create Post" component={CreatePost} />
-        <Drawer.Screen name="Donate" component={Donate} />
-        <Drawer.Screen name="Search" component={Search} />
-        {isValidAuthState(authState) ? (
-          <Drawer.Screen name="Switch Account" component={Login} />
-        ) : (
-          <Drawer.Screen name="Login" component={Login} />
-        )}
-      </Drawer.Navigator>
+      <MainStack />
     </NavigationContainer>
   );
 }
@@ -76,13 +93,15 @@ function getLinkingOptions(): LinkingOptions<{}> {
     prefixes: [createURL("/")],
     config: {
       screens: {
-        Home: {
+        DrawerNavigator: {
           screens: {
-            Feed: "home/feed",
-            Notifications: "home/notifications",
-            ["My Profile"]: "home/my-profile",
-            Settings: "home/settings",
-          },
+            Home: {
+              screens: {
+                Feed: "home/feed",
+                Notifications: "home/notifications",
+                ["My Profile"]: "home/my-profile",
+                Settings: "home/settings",
+              },
         },
         Donate: "donate",
         ["Create Post"]: "create-post",
@@ -90,16 +109,20 @@ function getLinkingOptions(): LinkingOptions<{}> {
         Login: {
           screens: {
             ["Sign In"]: "/login/sign-in",
-            ["Sign Up"]: "/login/sign-up",
+                ["Sign Up"]: "/login/sign-up",
+              },
+            },
+            Search: {
+              screens: {
+                Home: "/search",
+                User: "/user/:username",
+                Post: "/post/:id",
+              },
+            },
           },
         },
-        Search: {
-          screens: {
-            Home: "/search",
-            User: "/user/:username",
-            Post: "/post/:id",
-          },
-        },
+        Success: "success",
+        Cancel: "cancel",
       },
     },
   };

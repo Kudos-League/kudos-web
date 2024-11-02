@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Button, View, Text, StyleSheet } from "react-native";
+import { FormProvider, useForm } from "react-hook-form";
+import DonationAmountPicker from "./DonationAmountPicker";
 
 export default function StripeWeb() {
   const [stripe, setStripe] = useState<Stripe | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [donationAmount, setDonationAmount] = useState(500);
+
+  const formMethods = useForm();
 
   const fetchPublishableKey = async () => {
     try {
@@ -60,11 +65,11 @@ export default function StripeWeb() {
     if (!stripe) return;
 
     const response = await fetch(
-      `${process.env.BACKEND_URI}/stripe/create-checkout-session`,
+      `${process.env.BACKEND_URI}/stripe/checkout-session`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 5000 }), // $50.00
+        body: JSON.stringify({ amount: donationAmount }),
       }
     );
 
@@ -76,11 +81,14 @@ export default function StripeWeb() {
   };
 
   return (
-    <View style={styles.container}>
-      {error && <Text>{error}</Text>}
-      <Text style={styles.headerText}>Support Us with a Donation</Text>
-      <Button title="Donate" disabled={!loading} onPress={handlePayment} />
-    </View>
+    <FormProvider {...formMethods}>
+      <View style={styles.container}>
+        {error && <Text>{error}</Text>}
+        <Text style={styles.headerText}>Support Us with a Donation</Text>
+        <DonationAmountPicker onAmountChange={setDonationAmount} />
+        <Button title="Donate" disabled={!loading} onPress={handlePayment} />
+      </View>
+    </FormProvider>
   );
 }
 

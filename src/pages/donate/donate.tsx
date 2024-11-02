@@ -1,17 +1,24 @@
-import { View, Text, StyleSheet } from "react-native";
-
-// import globalStyles from "shared/styles";
-import Stripe from "shared/components/payment";
-
+import { StyleSheet } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
-const BoldAndBeautiful = () => (
-  <SafeAreaProvider>
-    <SafeAreaView style={styles.container}>
-      <Stripe />
-    </SafeAreaView>
-  </SafeAreaProvider>
-);
+import ErrorBoundary from "shared/components/ErrorBoundary";
+import Stripe from "shared/components/payment";
+
+// TODO: Show sidebar
+
+// import globalStyles from "shared/styles";
+
+const DonatePage = () => {
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <ErrorBoundary>
+          <Stripe />
+        </ErrorBoundary>
+      </SafeAreaView>
+    </SafeAreaProvider>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -25,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BoldAndBeautiful;
+export default DonatePage;
