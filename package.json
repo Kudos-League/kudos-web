@@ -8,7 +8,7 @@
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
     "test": "jest --watchAll",
-    "build:web": "npx expo build:web"
+    "build:web": "npx expo export:web"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
