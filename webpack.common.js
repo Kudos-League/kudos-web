@@ -3,7 +3,10 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = async function (env, argv) {
-  const config = await createExpoWebpackConfigAsync(env, argv);
+  const config = await createExpoWebpackConfigAsync(
+    { ...env, mode: argv.mode },
+    argv
+  );
 
   if (!config.resolve.plugins) {
     config.resolve.plugins = [];
