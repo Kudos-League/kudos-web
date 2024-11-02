@@ -34,10 +34,13 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build the Web App (Dev Environment)
+      - name: Build the Web App
         run: npm run build:web:dev
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Add .nojekyll
+        run: echo "" > web-build/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
