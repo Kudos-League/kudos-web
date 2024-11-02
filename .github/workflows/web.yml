@@ -15,9 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
+          ref: stripe
           fetch-depth: 0
+
+      - name: Prepare gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git worktree add /tmp/gh-pages gh-pages
+          rm -rf /tmp/gh-pages/*
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -38,3 +45,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./web-build
           publish_branch: gh-pages
+          destination_dir: /tmp/gh-pages
