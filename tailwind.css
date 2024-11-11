@@ -6,6 +6,14 @@
   display: none
 }
 
+.w-32 {
+  width: 8rem
+}
+
+.max-w-lg {
+  max-width: 32rem
+}
+
 .flex-1 {
   flex: 1 1 0%
 }
@@ -14,7 +22,11 @@
   border-width: 1px
 }
 
-.bg-red-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity))
+.border-2 {
+  border-width: 2px
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity))
 }

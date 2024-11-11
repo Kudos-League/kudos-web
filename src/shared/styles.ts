@@ -11,7 +11,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginVertical: 5,
         gap: 10,
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     errorMessage: {
         color: 'red',
