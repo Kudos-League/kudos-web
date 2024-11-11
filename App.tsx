@@ -20,24 +20,30 @@ import { Provider } from 'react-redux';
 import { useAppSelector } from "redux_store/hooks";
 import { isValidAuthState } from "redux_store/slices/auth-slice";
 
+import { TailwindProvider, useTailwind } from 'tailwind-rn';
+import utilities from './tailwind.json';
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <AppImpl />
-    </Provider>
+    <TailwindProvider utilities={utilities}>
+      <Provider store={store}>
+        <AppImpl />
+      </Provider>
+    </TailwindProvider>
   )
 }
 
 function AppImpl() {
   useAuth();
   const authState = useAppSelector(state => state.auth);
+  const tailwind = useTailwind();
 
   return (
     <NavigationContainer linking={getLinkingOptions()}>
       <View style={styles.root}>
-        <View style={styles.mainContent}>
+        <View style={tailwind('flex-1')}>
           <Drawer.Navigator
               initialRouteName="Home"
               screenOptions={{
