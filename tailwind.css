@@ -1,17 +1,13 @@
+.m-8 {
+  margin: 2rem
+}
+
 .flex {
   display: flex
 }
 
 .hidden {
   display: none
-}
-
-.w-32 {
-  width: 8rem
-}
-
-.max-w-lg {
-  max-width: 32rem
 }
 
 .flex-1 {
@@ -22,11 +18,11 @@
   border-width: 1px
 }
 
-.border-2 {
-  border-width: 2px
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity))
+.p-4 {
+  padding: 1rem
 }

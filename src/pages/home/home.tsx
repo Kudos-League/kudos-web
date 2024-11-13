@@ -5,7 +5,7 @@ import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-nav
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import Feed from './tabs/feed';
-import MyProfile from './tabs/my-profile';
+import MyProfile from './tabs/my-profile/my-profile';
 
 const Tab = createBottomTabNavigator();
 
