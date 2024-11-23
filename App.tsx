@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
@@ -19,45 +19,50 @@ import Login from "pages/login/login";
 import Search from "pages/search/search";
 
 import { store } from "redux_store/store";
-import useAuth from "shared/hooks/use-auth";
 import { Provider } from "react-redux";
 import { useAppSelector } from "redux_store/hooks";
 import { isValidAuthState } from "redux_store/slices/auth-slice";
+import useAuth from "shared/hooks/use-auth";
 
-import { TailwindProvider, useTailwind } from 'tailwind-rn';
-import utilities from './tailwind.json';
+import { TailwindProvider, useTailwind } from "tailwind-rn";
+import utilities from "./tailwind.json";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 function DrawerNavigator() {
   const authState = useAppSelector((state) => state.auth);
+  const tailwind = useTailwind();
 
   return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerRight: () => (
-          <Link
-            style={{ marginRight: 15 }}
-            to={{ screen: "Create Post" }}
-            accessibilityLabel="Create Post"
-          >
-            <FontAwesome name="plus" size={25} />
-          </Link>
-        ),
-      }}
-    >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Create Post" component={CreatePost} />
-      <Drawer.Screen name="Donate" component={Donate} />
-      <Drawer.Screen name="Search" component={Search} />
-      {authState && isValidAuthState(authState) ? (
-        <Drawer.Screen name="Switch Account" component={Login} />
-      ) : (
-        <Drawer.Screen name="Login" component={Login} />
-      )}
-    </Drawer.Navigator>
+    <View style={styles.root}>
+      <View style={tailwind("flex-1")}>
+        <Drawer.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerRight: () => (
+              <Link
+                style={{ marginRight: 15 }}
+                to={{ screen: "Create Post" }}
+                accessibilityLabel="Create Post"
+              >
+                <FontAwesome name="plus" size={25} />
+              </Link>
+            ),
+          }}
+        >
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="Create Post" component={CreatePost} />
+          <Drawer.Screen name="Donate" component={Donate} />
+          <Drawer.Screen name="Search" component={Search} />
+          {authState && isValidAuthState(authState) ? (
+            <Drawer.Screen name="Switch Account" component={Login} />
+          ) : (
+            <Drawer.Screen name="Login" component={Login} />
+          )}
+        </Drawer.Navigator>
+      </View>
+    </View>
   );
 }
 
@@ -73,11 +78,14 @@ function MainStack() {
 
 export default function App() {
   return (
+    // TODO: TailwindProvider doesn't expect children
+    // <TailwindProvider utilities={utilities}>
     <Provider store={store}>
       <Suspense fallback={<Text>Loading app...</Text>}>
         <AppImpl />
       </Suspense>
     </Provider>
+    // </TailwindProvider>
   );
 }
 
@@ -105,13 +113,13 @@ function getLinkingOptions(): LinkingOptions<{}> {
                 ["My Profile"]: "home/my-profile",
                 Settings: "home/settings",
               },
-        },
-        Donate: "donate",
-        ["Create Post"]: "create-post",
-        // TODO: Change the name to "Switch Accounts" if there is already a token
-        Login: {
-          screens: {
-            ["Sign In"]: "/login/sign-in",
+            },
+            Donate: "donate",
+            ["Create Post"]: "create-post",
+            // TODO: Change the name to "Switch Accounts" if there is already a token
+            Login: {
+              screens: {
+                ["Sign In"]: "/login/sign-in",
                 ["Sign Up"]: "/login/sign-up",
               },
             },
