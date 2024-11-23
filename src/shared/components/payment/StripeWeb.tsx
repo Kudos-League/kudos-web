@@ -21,7 +21,6 @@ export default function StripeWeb() {
       const response = await fetch(
         `${process.env.BACKEND_URI}/stripe/publishable-key`
       );
-      console.log({ response });
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);

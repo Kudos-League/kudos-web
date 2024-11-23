@@ -39,8 +39,10 @@ jobs:
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Add .nojekyll
-        run: echo "" > web-build/.nojekyll
+       - name: Add Redirects and 404 Fallback
+        run: |
+          echo "" > web-build/.nojekyll
+          cp web-build/index.html web-build/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
