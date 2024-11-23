@@ -34,3 +34,6 @@ export type CreateUserDTO = {
   password: string;
 }
 
+export type UserSettingsDTO = {
+  about?: string;
+}

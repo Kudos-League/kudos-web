@@ -59,10 +59,12 @@ export default function CreatePost() {
             registerOptions={{required: true}} />
       </View>
       <View style={globalStyles.formRow}>
-        <Input 
+        <Input
+            style={{minHeight: 300}}
             name="body"
             label="Body"
             form={form}
+            multiline={true}
             registerOptions={{required: true}} />
       </View>
       <View style={globalStyles.formRow}>

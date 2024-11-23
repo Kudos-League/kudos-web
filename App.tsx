@@ -24,6 +24,9 @@ import { Provider } from "react-redux";
 import { useAppSelector } from "redux_store/hooks";
 import { isValidAuthState } from "redux_store/slices/auth-slice";
 
+import { TailwindProvider, useTailwind } from 'tailwind-rn';
+import utilities from './tailwind.json';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
