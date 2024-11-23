@@ -1,3 +1,4 @@
+const path = require("path");
 const createExpoWebpackConfigAsync = require("@expo/webpack-config");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const webpack = require("webpack");
@@ -10,7 +11,12 @@ module.exports = async function (env, argv) {
     config.resolve.plugins = [];
   }
 
-  config.resolve.plugins.push(new TsconfigPathsPlugin());
+  config.resolve.plugins.push(
+    new TsconfigPathsPlugin({
+      configFile: path.resolve(__dirname, "tsconfig.json"),
+      extensions: [".ts", ".tsx", ".js", ".jsx"],
+    })
+  );
 
   config.resolve.fallback = {
     ...config.resolve.fallback,
