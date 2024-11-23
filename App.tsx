@@ -32,38 +32,37 @@ const Stack = createStackNavigator();
 
 function DrawerNavigator() {
   const authState = useAppSelector((state) => state.auth);
-  // Commented out because it causes white page error in dev
-  //const tailwind = useTailwind();
+  const tailwind = useTailwind();
 
   return (
-    //<View style={styles.root}>
-    //<View style={tailwind("flex-1")}>
-    <Drawer.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerRight: () => (
-          <Link
-            style={{ marginRight: 15 }}
-            to={{ screen: "Create Post" }}
-            accessibilityLabel="Create Post"
-          >
-            <FontAwesome name="plus" size={25} />
-          </Link>
-        ),
-      }}
-    >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Create Post" component={CreatePost} />
-      <Drawer.Screen name="Donate" component={Donate} />
-      <Drawer.Screen name="Search" component={Search} />
-      {authState && isValidAuthState(authState) ? (
-        <Drawer.Screen name="Switch Account" component={Login} />
-      ) : (
-        <Drawer.Screen name="Login" component={Login} />
-      )}
-    </Drawer.Navigator>
-    //</View>
-    //</View>
+    <View style={styles.root}>
+      <View style={tailwind("flex-1")}>
+        <Drawer.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerRight: () => (
+              <Link
+                style={{ marginRight: 15 }}
+                to={{ screen: "Create Post" }}
+                accessibilityLabel="Create Post"
+              >
+                <FontAwesome name="plus" size={25} />
+              </Link>
+            ),
+          }}
+        >
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="Create Post" component={CreatePost} />
+          <Drawer.Screen name="Donate" component={Donate} />
+          <Drawer.Screen name="Search" component={Search} />
+          {authState && isValidAuthState(authState) ? (
+            <Drawer.Screen name="Switch Account" component={Login} />
+          ) : (
+            <Drawer.Screen name="Login" component={Login} />
+          )}
+        </Drawer.Navigator>
+      </View>
+    </View>
   );
 }
 
