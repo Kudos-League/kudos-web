@@ -33,7 +33,7 @@ module.exports = async function (env, argv) {
 
   config.output = {
     ...config.output,
-    publicPath: "/kudos-web/",
+    publicPath: "./",
   };
 
   return config;
