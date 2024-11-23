@@ -39,7 +39,7 @@ jobs:
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-       - name: Add Redirects and 404 Fallback
+      - name: Add Redirects and 404 Fallback
         run: |
           echo "" > web-build/.nojekyll
           cp web-build/index.html web-build/404.html
