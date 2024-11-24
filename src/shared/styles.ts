@@ -3,8 +3,11 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
+  },
+  contentContainer: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    padding: 16,
   },
   formRow: {
     flexDirection: "row",

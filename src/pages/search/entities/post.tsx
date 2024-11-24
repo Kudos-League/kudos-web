@@ -44,7 +44,10 @@ const Post = () => {
   }, [id]);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
       {loading && <ActivityIndicator size="large" color="#0000ff" />}
       {error && <Text style={styles.errorMessage}>{error}</Text>}
       {!loading && !error && postDetails && (
