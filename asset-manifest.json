@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/static/js/bundle.js",
+    "static/js/src_shared_components_payment_StripeNative_tsx.chunk.js": "/static/js/src_shared_components_payment_StripeNative_tsx.chunk.js",
+    "static/js/src_shared_components_payment_StripeWeb_tsx.chunk.js": "/static/js/src_shared_components_payment_StripeWeb_tsx.chunk.js",
+    "static/media/FontAwesome.ttf": "/static/media/FontAwesome.1e59d2330b4c6deb84b3.ttf",
+    "index.html": "/index.html",
+    "bundle.js.map": "/static/js/bundle.js.map",
+    "src_shared_components_payment_StripeNative_tsx.chunk.js.map": "/static/js/src_shared_components_payment_StripeNative_tsx.chunk.js.map",
+    "src_shared_components_payment_StripeWeb_tsx.chunk.js.map": "/static/js/src_shared_components_payment_StripeWeb_tsx.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/bundle.js"
+  ]
+}
