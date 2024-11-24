@@ -12,7 +12,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import Home from "pages/home/home";
 import CreatePost from "pages/create-post/create-post";
-import PostDetails from "pages/post/post";
 import Donate from "pages/donate/donate";
 import Success from "pages/donate/success";
 import Cancel from "pages/donate/cancel";
@@ -74,7 +73,6 @@ function MainStack() {
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="Cancel" component={Cancel} />
-      <Stack.Screen name="PostDetails" component={PostDetails} />
       <Stack.Screen
         name="NotFound"
         component={() => (
@@ -145,7 +143,6 @@ function getLinkingOptions(): LinkingOptions<{}> {
         },
         Success: "success",
         Cancel: "cancel",
-        PostDetails: "posts/:id",
         NotFound: "*",
       },
     },
