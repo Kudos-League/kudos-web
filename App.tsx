@@ -74,6 +74,7 @@ function MainStack() {
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="Cancel" component={Cancel} />
+      <Stack.Screen name="PostDetails" component={PostDetails} />
     </Stack.Navigator>
   );
 }

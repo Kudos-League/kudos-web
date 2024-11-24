@@ -5,21 +5,15 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 // TODO: Move this to a better location
-type SearchStackParamList = {
-  Home: undefined;
-  User: { username: string };
-  Post: { id: string };
-};
-
 type RootStackParamList = {
-  DrawerNavigator: {
-    screen: keyof SearchStackParamList;
-    params?: SearchStackParamList[keyof SearchStackParamList];
-  };
+  DrawerNavigator: undefined; // Main drawer
   Success: undefined;
   Cancel: undefined;
+  PostDetails: { id: string }; // Ensure this exists
   NotFound: undefined;
 };
+
+type NavigationProps = StackNavigationProp<RootStackParamList, "PostDetails">;
 
 // Example data structure
 // interface Props {
@@ -61,16 +55,13 @@ const usersResponse = [
 ];
 
 export default function PostsContainer() {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProps>();
 
   const [users, setUsers] = useState<any>(usersResponse);
   const [loading, setLoading] = useState(false);
 
   const handlePostPress = (id: string) => {
-    navigation.navigate("DrawerNavigator", {
-      screen: "Post",
-      params: { id },
-    });
+    navigation.navigate("PostDetails", { id });
   };
 
   // Fetch more communities
