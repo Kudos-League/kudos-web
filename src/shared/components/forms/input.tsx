@@ -5,31 +5,35 @@ import {
   UseControllerProps,
   UseFormReturn,
 } from "react-hook-form";
-import { TextInput } from "react-native-paper";
+import { TextInput, TextInputProps } from "react-native-paper";
 import { KeyboardTypeOptions } from "react-native";
 
-type Props<T extends FieldValues> = {
+interface IProps<T extends FieldValues> extends TextInputProps {
   name: string;
   label: string;
   form: UseFormReturn<T>;
-  type?: "password";
+  type?: string;
   registerOptions?: RegisterOptions<T>;
   placeholder?: string;
   value?: string;
   onChangeText?: (value: string) => void;
   keyboardType?: KeyboardTypeOptions;
-} & UseControllerProps<T>;
+  multiline?: boolean;
+}
+
+type Props<T extends FieldValues> = IProps<T> & UseControllerProps<T>;
 
 export default function Input<T extends FieldValues>({
   name,
   label,
   form,
-  // registerOptions,
+  registerOptions,
   type,
   placeholder,
   value,
   onChangeText,
   keyboardType,
+  multiline,
 }: Props<T>) {
   const { field } = useController<T>({
     control: form.control,
@@ -47,8 +51,10 @@ export default function Input<T extends FieldValues>({
         field.onChange(val);
         if (onChangeText) onChangeText(val);
       }}
-      secureTextEntry={type === "password"}
       keyboardType={keyboardType}
+      multiline={multiline}
+      secureTextEntry={type === "password"}
+      {...form.register(name, registerOptions)}
     />
   );
 }
