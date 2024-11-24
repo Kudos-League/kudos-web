@@ -75,6 +75,14 @@ function MainStack() {
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="Cancel" component={Cancel} />
       <Stack.Screen name="PostDetails" component={PostDetails} />
+      <Stack.Screen
+        name="NotFound"
+        component={() => (
+          <View>
+            <Text>Page Not Found</Text>
+          </View>
+        )}
+      />
     </Stack.Navigator>
   );
 }
@@ -138,6 +146,7 @@ function getLinkingOptions(): LinkingOptions<{}> {
         Success: "success",
         Cancel: "cancel",
         PostDetails: "posts/:id",
+        NotFound: "*",
       },
     },
   };
