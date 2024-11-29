@@ -23,7 +23,7 @@ export default function CreatePost() {
     const request: CreatePostDTO = {
       title: data.title,
       body: data.body,
-      isRequest: data.type === "request",
+      type: data.type,
       files: data.files || [],
     };
 
@@ -41,13 +41,15 @@ export default function CreatePost() {
     <View style={globalStyles.container}>
       <View style={globalStyles.formRow}>
         <Text>I want to</Text>
-        <Picker
+        <Input
           name="type"
-          form={form}
+          label="Post Type"
+          type="dropdown"
           options={[
             { label: "Get stuff", value: "request" },
-            { label: "Give stuff", value: "offer" },
+            { label: "Give stuff", value: "gift" },
           ]}
+          form={form}
         />
       </View>
       <View style={globalStyles.formRow}>

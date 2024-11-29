@@ -3,7 +3,7 @@
 export type CreatePostDTO = {
   title: string;
   body: string;
-  isRequest: boolean;
+  type: string;
   files?: File[];
 };
 
